@@ -2,9 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { DataSource } from "typeorm";
 
-dotenv.config();
-
-export const AppDataSource: DataSource = new DataSource({
+const AppDataSource: DataSource = new DataSource({
   type: "mysql",
   host: "localhost",
   port: parseInt(process.env.DB_PORT),
@@ -13,6 +11,10 @@ export const AppDataSource: DataSource = new DataSource({
   database: "siap",
   entities: [__dirname + "/entity/**/*{.js,.ts}"],
   migrations: [__dirname + "/migration/**/*{.js,.ts}"],
+  migrationsTableName: "migrations",
+  synchronize: false,
+  logging: true,
+  migrationsRun: true,
 });
 
 export default AppDataSource;
