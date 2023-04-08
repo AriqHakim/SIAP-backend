@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Broadcast } from "./Broadcast.entity";
 
 @Entity("attachment")
@@ -23,5 +29,6 @@ export class Attachment {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
+  @JoinColumn({ name: "broadcast_id" })
   broadcast: Broadcast;
 }
