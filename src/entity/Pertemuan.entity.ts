@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Kelas } from "./Kelas.entity";
+import { Presensi } from "./Presensi.entity";
 
 @Entity("pertemuan")
 export class Pertemuan {
@@ -48,4 +50,7 @@ export class Pertemuan {
   })
   @JoinColumn({ name: "kelas_id" })
   kelas: Kelas;
+
+  @OneToMany(() => Presensi, (p) => p.pertemuan)
+  presensi?: Presensi[];
 }

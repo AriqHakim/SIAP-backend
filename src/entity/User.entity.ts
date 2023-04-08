@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { RoleApproval } from "./RoleApproval.entity";
 import { AsistenPraktikum } from "./AsistenPraktikum.entity";
+import { Presensi } from "./Presensi.entity";
 
 @Entity("users")
 export class User {
@@ -49,4 +50,7 @@ export class User {
 
   @OneToOne(() => AsistenPraktikum, (a) => a.user)
   asisten?: AsistenPraktikum;
+
+  @OneToMany(() => Presensi, (p) => p.pertemuan)
+  presensi?: Presensi[];
 }
