@@ -2,29 +2,23 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
+  OneToOne,
   JoinColumn,
 } from "typeorm";
 import { User } from "./User.entity";
 
-export enum STATUS_APPROVAL {
-  ACCEPTED = "Accepted",
-  PENDING = "Pending",
-  REJECTED = "Rejected",
-}
-
-@Entity("role_approval")
-export class RoleApproval {
+@Entity("asisten_praktikum")
+export class AsistenPraktikum {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({
-    type: "enum",
-    enum: STATUS_APPROVAL,
+    type: "varchar",
+    length: 50,
   })
-  status: STATUS_APPROVAL;
+  instansi: string;
 
-  @ManyToOne(() => User, {
+  @OneToOne(() => User, {
     cascade: true,
     onUpdate: "CASCADE",
     onDelete: "CASCADE",

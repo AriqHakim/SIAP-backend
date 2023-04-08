@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+} from "typeorm";
+import { RoleApproval } from "./RoleApproval.entity";
+import { AsistenPraktikum } from "./AsistenPraktikum.entity";
 
 @Entity("users")
 export class User {
@@ -35,4 +43,10 @@ export class User {
     length: 20,
   })
   noTelp: string;
+
+  @OneToMany(() => RoleApproval, (r) => r.user)
+  approval?: RoleApproval;
+
+  @OneToOne(() => AsistenPraktikum, (a) => a.user)
+  asisten?: AsistenPraktikum;
 }
