@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { AsistenPraktikum } from "./AsistenPraktikum.entity";
 import { Broadcast } from "./Broadcast.entity";
+import { Pertemuan } from "./Pertemuan.entity";
 
 @Entity("kelas")
 export class Kelas {
@@ -42,4 +43,7 @@ export class Kelas {
 
   @OneToMany(() => Broadcast, (bc) => bc.kelas)
   broadcasts?: Broadcast[];
+
+  @OneToMany(() => Pertemuan, (p) => p.kelas)
+  pertemuan?: Pertemuan[];
 }

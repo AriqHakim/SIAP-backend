@@ -20,6 +20,8 @@ import { Broadcast } from "./entity/Broadcast.entity";
 import { Broadcast1680939543362 } from "./migration/1680939543362-Broadcast";
 import { Attachment } from "./entity/Attachment.entity";
 import { Attachment1680940858600 } from "./migration/1680940858600-Attachment";
+import { Pertemuan } from "./entity/Pertemuan.entity";
+import { Pertemuan1680941170378 } from "./migration/1680941170378-Pertemuan";
 
 const AppDataSource: DataSource = new DataSource({
   type: "mysql",
@@ -38,6 +40,7 @@ const AppDataSource: DataSource = new DataSource({
     Kategori,
     Broadcast,
     Attachment,
+    Pertemuan,
   ],
   migrations: [
     Admin1680922513935,
@@ -49,6 +52,7 @@ const AppDataSource: DataSource = new DataSource({
     Kategori1680928792339,
     Broadcast1680939543362,
     Attachment1680940858600,
+    Pertemuan1680941170378,
   ],
   migrationsTableName: "migrations",
   synchronize: false,
