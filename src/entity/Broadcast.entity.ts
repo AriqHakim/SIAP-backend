@@ -3,11 +3,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Kategori } from "./Kategori.entity";
 import { AsistenPraktikum } from "./AsistenPraktikum.entity";
 import { Kelas } from "./Kelas.entity";
+import { Attachment } from "./Attachment.entity";
 
 @Entity("broadcast")
 export class Broadcast {
@@ -49,4 +51,7 @@ export class Broadcast {
   })
   @JoinColumn({ name: "kategori_id" })
   kategori?: Kategori;
+
+  @OneToMany(() => Attachment, (a) => a.broadcast)
+  attachment?: Attachment[];
 }
