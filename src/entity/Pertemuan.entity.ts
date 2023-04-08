@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { Kelas } from "./Kelas.entity";
 import { Presensi } from "./Presensi.entity";
+import { Perizinan } from "./Perizinan.entity";
 
 @Entity("pertemuan")
 export class Pertemuan {
@@ -53,4 +54,7 @@ export class Pertemuan {
 
   @OneToMany(() => Presensi, (p) => p.pertemuan)
   presensi?: Presensi[];
+
+  @OneToMany(() => Perizinan, (p) => p.pertemuan)
+  perizinan?: Perizinan[];
 }

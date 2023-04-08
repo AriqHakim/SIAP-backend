@@ -24,6 +24,8 @@ import { Pertemuan } from "./entity/Pertemuan.entity";
 import { Pertemuan1680941170378 } from "./migration/1680941170378-Pertemuan";
 import { Presensi } from "./entity/Presensi.entity";
 import { Presensi1680942631095 } from "./migration/1680942631095-Presensi";
+import { Perizinan } from "./entity/Perizinan.entity";
+import { Perizinan1680943216115 } from "./migration/1680943216115-Perizinan";
 
 const AppDataSource: DataSource = new DataSource({
   type: "mysql",
@@ -44,6 +46,7 @@ const AppDataSource: DataSource = new DataSource({
     Attachment,
     Pertemuan,
     Presensi,
+    Perizinan,
   ],
   migrations: [
     Admin1680922513935,
@@ -57,6 +60,7 @@ const AppDataSource: DataSource = new DataSource({
     Attachment1680940858600,
     Pertemuan1680941170378,
     Presensi1680942631095,
+    Perizinan1680943216115,
   ],
   migrationsTableName: "migrations",
   synchronize: false,
