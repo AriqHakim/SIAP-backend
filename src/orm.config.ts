@@ -12,6 +12,8 @@ import { AsistenPraktikum } from "./entity/AsistenPraktikum.entity";
 import { AsistenPraktikum1680924698192 } from "./migration/1680924698192-AsistenPraktikum";
 import { Kelas } from "./entity/Kelas.entity";
 import { Kelas1680928192303 } from "./migration/1680928192303-Kelas";
+import { UserKelas } from "./entity/UserKelas.entity";
+import { UserKelas1680928495302 } from "./migration/1680928495302-UserKelas";
 
 const AppDataSource: DataSource = new DataSource({
   type: "mysql",
@@ -20,13 +22,14 @@ const AppDataSource: DataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [Admin, User, RoleApproval, AsistenPraktikum, Kelas],
+  entities: [Admin, User, RoleApproval, AsistenPraktikum, Kelas, UserKelas],
   migrations: [
     Admin1680922513935,
     User1680923243154,
     RoleApproval1680923868308,
     AsistenPraktikum1680924698192,
     Kelas1680928192303,
+    UserKelas1680928495302,
   ],
   migrationsTableName: "migrations",
   synchronize: false,
