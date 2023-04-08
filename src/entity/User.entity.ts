@@ -45,7 +45,7 @@ export class User {
   noTelp: string;
 
   @OneToMany(() => RoleApproval, (r) => r.user)
-  approval?: RoleApproval;
+  approval?: RoleApproval[];
 
   @OneToOne(() => AsistenPraktikum, (a) => a.user)
   asisten?: AsistenPraktikum;
