@@ -16,6 +16,8 @@ import { UserKelas } from "./entity/UserKelas.entity";
 import { UserKelas1680928495302 } from "./migration/1680928495302-UserKelas";
 import { Kategori } from "./entity/Kategori.entity";
 import { Kategori1680928792339 } from "./migration/1680928792339-Kategori";
+import { Broadcast } from "./entity/Broadcast.entity";
+import { Broadcast1680939543362 } from "./migration/1680939543362-Broadcast";
 
 const AppDataSource: DataSource = new DataSource({
   type: "mysql",
@@ -32,6 +34,7 @@ const AppDataSource: DataSource = new DataSource({
     Kelas,
     UserKelas,
     Kategori,
+    Broadcast,
   ],
   migrations: [
     Admin1680922513935,
@@ -41,6 +44,7 @@ const AppDataSource: DataSource = new DataSource({
     Kelas1680928192303,
     UserKelas1680928495302,
     Kategori1680928792339,
+    Broadcast1680939543362,
   ],
   migrationsTableName: "migrations",
   synchronize: false,

@@ -29,5 +29,5 @@ export class AsistenPraktikum {
   user: User;
 
   @OneToMany(() => Kelas, (k) => k.asisten)
-  kelas: Kelas[];
+  kelas?: Kelas[];
 }

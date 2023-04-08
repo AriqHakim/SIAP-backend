@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { AsistenPraktikum } from "./AsistenPraktikum.entity";
+import { Broadcast } from "./Broadcast.entity";
 
 @Entity("kelas")
 export class Kelas {
@@ -37,4 +39,7 @@ export class Kelas {
   })
   @JoinColumn({ name: "asisten_id" })
   asisten: AsistenPraktikum;
+
+  @OneToMany(() => Broadcast, (bc) => bc.kelas)
+  broadcasts?: Broadcast[];
 }
