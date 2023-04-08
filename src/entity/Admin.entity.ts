@@ -1,19 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity("users")
+@Entity("admin")
 export class Admin {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({
     type: "varchar",
-    length: 255,
+    length: 50,
   })
   name: string;
 
   @Column({
     type: "varchar",
-    length: 255,
+    length: 50,
   })
   email: string;
 

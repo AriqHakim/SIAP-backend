@@ -1,6 +1,8 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import { DataSource } from "typeorm";
+import { Admin } from "./entity/Admin.entity";
+import { Admin1680922513935 } from "./migration/1680922513935-Admin";
 
 const AppDataSource: DataSource = new DataSource({
   type: "mysql",
@@ -8,9 +10,9 @@ const AppDataSource: DataSource = new DataSource({
   port: parseInt(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  database: "siap",
-  entities: [__dirname + "/entity/**/*{.js,.ts}"],
-  migrations: [__dirname + "/migration/**/*{.js,.ts}"],
+  database: process.env.DB_NAME,
+  entities: [Admin],
+  migrations: [Admin1680922513935],
   migrationsTableName: "migrations",
   synchronize: false,
   logging: true,
