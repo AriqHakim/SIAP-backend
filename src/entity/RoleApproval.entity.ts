@@ -4,31 +4,31 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
-} from "typeorm";
-import { User } from "./User.entity";
+} from 'typeorm';
+import { User } from './User.entity';
 
 export enum STATUS_APPROVAL {
-  ACCEPTED = "Accepted",
-  PENDING = "Pending",
-  REJECTED = "Rejected",
+  ACCEPTED = 'Accepted',
+  PENDING = 'Pending',
+  REJECTED = 'Rejected',
 }
 
-@Entity("role_approval")
+@Entity('role_approval')
 export class RoleApproval {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: STATUS_APPROVAL,
   })
   status: STATUS_APPROVAL;
 
   @ManyToOne(() => User, {
     cascade: true,
-    onUpdate: "CASCADE",
-    onDelete: "CASCADE",
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: "user_id" })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }

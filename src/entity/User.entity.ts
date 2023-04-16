@@ -4,44 +4,44 @@ import {
   Column,
   OneToMany,
   OneToOne,
-} from "typeorm";
-import { RoleApproval } from "./RoleApproval.entity";
-import { AsistenPraktikum } from "./AsistenPraktikum.entity";
-import { Presensi } from "./Presensi.entity";
-import { Perizinan } from "./Perizinan.entity";
+} from 'typeorm';
+import { RoleApproval } from './RoleApproval.entity';
+import { AsistenPraktikum } from './AsistenPraktikum.entity';
+import { Presensi } from './Presensi.entity';
+import { Perizinan } from './Perizinan.entity';
 
-@Entity("users")
+@Entity('users')
 export class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   email: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 255,
   })
   password: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   name: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 12,
   })
   npm: string;
 
   @Column({
-    name: "no_telp",
-    type: "varchar",
+    name: 'no_telp',
+    type: 'varchar',
     length: 20,
   })
   noTelp: string;
