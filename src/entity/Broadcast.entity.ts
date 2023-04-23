@@ -5,51 +5,51 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-} from "typeorm";
-import { Kategori } from "./Kategori.entity";
-import { AsistenPraktikum } from "./AsistenPraktikum.entity";
-import { Kelas } from "./Kelas.entity";
-import { Attachment } from "./Attachment.entity";
+} from 'typeorm';
+import { Kategori } from './Kategori.entity';
+import { AsistenPraktikum } from './AsistenPraktikum.entity';
+import { Kelas } from './Kelas.entity';
+import { Attachment } from './Attachment.entity';
 
-@Entity("broadcast")
+@Entity('broadcast')
 export class Broadcast {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   judul: string;
 
   @Column({
-    type: "text",
+    type: 'text',
   })
   deskripsi: string;
 
   @Column({
-    type: "datetime",
+    type: 'datetime',
   })
   date: Date;
 
   @ManyToOne(() => Kelas, {
     cascade: true,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: "kelas_id" })
+  @JoinColumn({ name: 'kelas_id' })
   kelas: Kelas;
 
   @ManyToOne(() => AsistenPraktikum, {
     nullable: true,
   })
-  @JoinColumn({ name: "owner_id" })
+  @JoinColumn({ name: 'owner_id' })
   owner?: AsistenPraktikum;
 
   @ManyToOne(() => Kategori, {
     nullable: true,
   })
-  @JoinColumn({ name: "kategori_id" })
+  @JoinColumn({ name: 'kategori_id' })
   kategori?: Kategori;
 
   @OneToMany(() => Attachment, (a) => a.broadcast)

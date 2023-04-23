@@ -1,24 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity("admin")
+@Entity('admin')
 export class Admin {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   name: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   email: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 255,
   })
   password: string;

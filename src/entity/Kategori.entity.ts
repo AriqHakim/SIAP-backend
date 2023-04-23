@@ -1,12 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity("kategori")
+@Entity('kategori')
 export class Kategori {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   judul: string;

@@ -5,40 +5,40 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-} from "typeorm";
-import { AsistenPraktikum } from "./AsistenPraktikum.entity";
-import { Broadcast } from "./Broadcast.entity";
-import { Pertemuan } from "./Pertemuan.entity";
+} from 'typeorm';
+import { AsistenPraktikum } from './AsistenPraktikum.entity';
+import { Broadcast } from './Broadcast.entity';
+import { Pertemuan } from './Pertemuan.entity';
 
-@Entity("kelas")
+@Entity('kelas')
 export class Kelas {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   judul: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 50,
   })
   deskripsi: string;
 
   @Column({
-    type: "varchar",
+    type: 'varchar',
     length: 6,
   })
   kode: string;
 
   @ManyToOne(() => AsistenPraktikum, {
     cascade: true,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: "asisten_id" })
+  @JoinColumn({ name: 'asisten_id' })
   asisten: AsistenPraktikum;
 
   @OneToMany(() => Broadcast, (bc) => bc.kelas)
