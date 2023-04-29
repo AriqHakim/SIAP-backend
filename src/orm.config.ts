@@ -29,7 +29,7 @@ import { Perizinan1680943216115 } from './migration/1680943216115-Perizinan';
 
 const AppDataSource: DataSource = new DataSource({
   type: 'mysql',
-  host: 'localhost',
+  host: process.env.HOST,
   port: parseInt(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
