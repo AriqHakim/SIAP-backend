@@ -7,3 +7,8 @@ export class RegisterInterface {
   confirmPassword: string;
   isAsisten: boolean;
 }
+
+export class LoginUserInterface {
+  email: string;
+  password: string;
+}
