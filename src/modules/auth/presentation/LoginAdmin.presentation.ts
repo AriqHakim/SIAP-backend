@@ -1,23 +1,23 @@
 import { Request, Response } from 'express';
 import { LoginInterface } from '../Auth.interface';
-import { loginUserLogic } from '../logic/LoginUser.logic';
+import { loginAdminLogic } from '../logic/LoginAdmin.logic';
 
 /**
  * Endpoint method untuk register
  */
-export async function loginUser(req: Request, res: Response) {
+export async function loginAdmin(req: Request, res: Response) {
   try {
     const data: LoginInterface = {
       email: req.body.email,
       password: req.body.password,
     };
 
-    const user = await loginUserLogic(data);
+    const admin = await loginAdminLogic(data);
 
     const result = {
       status: 200,
       message: 'login sucessful',
-      data: user,
+      data: admin,
     };
     res.send(result);
     return result;

@@ -8,7 +8,7 @@ export class RegisterInterface {
   isAsisten: boolean;
 }
 
-export class LoginUserInterface {
+export class LoginInterface {
   email: string;
   password: string;
 }
