@@ -4,7 +4,7 @@ import * as UserData from './../User.data';
 import bcrypt from 'bcrypt';
 import { BadRequestError } from '../../../framework/error.interface';
 
-export async function registerUser(data: RegisterInterface): Promise<User> {
+export async function registerUser(data: RegisterInterface): Promise<boolean> {
   if (data.password != data.confirmPassword) {
     throw new BadRequestError("Password doesn't match!");
   }
@@ -20,5 +20,5 @@ export async function registerUser(data: RegisterInterface): Promise<User> {
   user.npm = data.npm;
   user.noTelp = data.noTelp;
 
-  return await UserData.upsertUser(user);
+  return (await UserData.upsertUser(user)) instanceof User;
 }
