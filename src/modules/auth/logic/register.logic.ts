@@ -4,7 +4,7 @@ import { STATUS_APPROVAL } from '../../../entity/RoleApproval.entity';
 import { RegisterInterface } from '../Auth.interface';
 import { BadRequestError } from '../../../framework/error.interface';
 import { upsertUser } from '../../../data-repository/User.data';
-import { upsertApproval } from 'src/data-repository/RoleApproval.data';
+import { upsertApproval } from '../../../data-repository/RoleApproval.data';
 import bcrypt from 'bcrypt';
 
 export async function registerUser(data: RegisterInterface): Promise<boolean> {
