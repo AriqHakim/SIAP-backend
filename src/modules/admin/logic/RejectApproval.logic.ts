@@ -8,10 +8,8 @@ import {
   upsertApproval,
 } from '../../../data-repository/RoleApproval.data';
 import { STATUS_APPROVAL } from '../../../entity/RoleApproval.entity';
-import { AsistenPraktikum } from '../../../entity/AsistenPraktikum.entity';
-import { upsertAsisten } from '../../../data-repository/AsistenPraktikum.data';
 
-export async function acceptApprovalLogic(data: ApprovalInterface) {
+export async function rejectApprovalLogic(data: ApprovalInterface) {
   if (data.id === null || data.id === undefined) {
     throw new BadRequestError('Id can not be null or undefined');
   }
@@ -25,15 +23,9 @@ export async function acceptApprovalLogic(data: ApprovalInterface) {
   if (approval.status !== STATUS_APPROVAL.PENDING) {
     throw new BadRequestError('Approval already accepted or rejected');
   }
-  approval.status = STATUS_APPROVAL.ACCEPTED;
+  approval.status = STATUS_APPROVAL.REJECTED;
 
   await upsertApproval(approval);
-
-  const asisten: AsistenPraktikum = new AsistenPraktikum();
-  asisten.instansi = '';
-  asisten.user = approval.user;
-
-  await upsertAsisten(asisten);
 
   return true;
 }

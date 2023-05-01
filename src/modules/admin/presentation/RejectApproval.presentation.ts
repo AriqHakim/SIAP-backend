@@ -4,10 +4,10 @@ import { UnauthorizedError } from '../../../framework/error.interface';
 import { extractDataFromJWT } from '../../../framework/JWTExtractor';
 import { jwt_config_admin } from '../../../jwt.config';
 import { Request, Response } from 'express';
-import { acceptApprovalLogic } from '../logic/AcceptApproval.logic';
+import { rejectApprovalLogic } from '../logic/RejectApproval.logic';
 import { ResponseBody } from '../../../framework/response.interface';
 
-export async function acceptApproval(req: Request, res: Response) {
+export async function rejectApproval(req: Request, res: Response) {
   try {
     const data: ApprovalInterface = new ApprovalInterface();
 
@@ -22,10 +22,10 @@ export async function acceptApproval(req: Request, res: Response) {
 
     data.id = req.params.id;
 
-    await acceptApprovalLogic(data);
+    await rejectApprovalLogic(data);
     const result: ResponseBody<boolean> = {
       status: 201,
-      message: 'Approval has been accepted',
+      message: 'Approval has been rejected',
       data: true,
     };
 

@@ -6,12 +6,7 @@ export class GetAllApprovalInterface {
   limit: number;
 }
 
-export class AcceptApprovalInterface {
-  admin: Admin;
-  id: string;
-}
-
-export class RejectApprovalInterface {
+export class ApprovalInterface {
   admin: Admin;
   id: string;
 }
