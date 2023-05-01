@@ -1,6 +1,6 @@
 import AppDataSource from '../orm.config';
 import { RoleApproval } from '../entity/RoleApproval.entity';
-import { FindManyOptions } from 'typeorm';
+import { FindManyOptions, FindOneOptions } from 'typeorm';
 import { countTotalData } from '../framework/utils';
 
 const repository = AppDataSource.getRepository(RoleApproval);
@@ -33,4 +33,15 @@ export async function getAllApprovals(offset: number, limit: number) {
     }),
     total_data: await countTotalData(RoleApproval, options),
   };
+}
+
+export async function getApprovalByID(id: string) {
+  const options: FindOneOptions<RoleApproval> = {
+    where: {
+      id: id,
+    },
+    relations: ['user'],
+  };
+
+  return await repository.findOne(options);
 }

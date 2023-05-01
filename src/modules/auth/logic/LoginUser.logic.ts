@@ -1,7 +1,7 @@
 import { User } from '../../../entity/User.entity';
 import { LoginInterface } from '../Auth.interface';
 import { getUserByEmail } from '../../../data-repository/User.data';
-import { getAsistenByUserID } from '../../../data-repository/Asisten.data';
+import { getAsistenByUserID } from '../../../data-repository/AsistenPraktikum.data';
 import bcrypt from 'bcrypt';
 import { BadRequestError } from '../../../framework/error.interface';
 import { signJWT } from './../../../jwt.config';

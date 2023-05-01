@@ -9,7 +9,7 @@ import { BadRequestError } from './framework/error.interface';
 // @Data
 import { getUserByID } from './data-repository/User.data';
 import { getAdminByID } from './data-repository/Admin.data';
-import { getAsistenByUserID } from './data-repository/Asisten.data';
+import { getAsistenByUserID } from './data-repository/AsistenPraktikum.data';
 
 // @Util
 import { JWTConfig } from './framework/JWTConfig.interface';
