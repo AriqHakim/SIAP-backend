@@ -1,12 +1,14 @@
-import AppDataSource from '../../orm.config';
-import { AsistenPraktikum } from '../../entity/AsistenPraktikum.entity';
+import AppDataSource from '../orm.config';
+import { AsistenPraktikum } from '../entity/AsistenPraktikum.entity';
+
+const repository = AppDataSource.getRepository(AsistenPraktikum);
 
 export async function upsertAsisten(asisten: AsistenPraktikum) {
-  return await AppDataSource.getRepository(AsistenPraktikum).save(asisten);
+  return await repository.save(asisten);
 }
 
 export async function getAsistenByID(id: string) {
-  return await AppDataSource.getRepository(AsistenPraktikum).findOne({
+  return await repository.findOne({
     where: {
       id: id,
     },
@@ -14,7 +16,7 @@ export async function getAsistenByID(id: string) {
 }
 
 export async function getAsistenByUserID(userId: string) {
-  return await AppDataSource.getRepository(AsistenPraktikum).findOne({
+  return await repository.findOne({
     join: {
       alias: 'asisten',
       innerJoin: {

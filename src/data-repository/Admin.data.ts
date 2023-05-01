@@ -1,8 +1,10 @@
-import AppDataSource from '../../orm.config';
-import { Admin } from '../../entity/Admin.entity';
+import AppDataSource from '../orm.config';
+import { Admin } from '../entity/Admin.entity';
+
+const repository = AppDataSource.getRepository(Admin);
 
 export async function getAdminByEmail(email: string) {
-  return await AppDataSource.getRepository(Admin).findOne({
+  return await repository.findOne({
     where: {
       email: email,
     },
@@ -10,7 +12,7 @@ export async function getAdminByEmail(email: string) {
 }
 
 export async function getAdminByID(id: string) {
-  return await AppDataSource.getRepository(Admin).findOne({
+  return await repository.findOne({
     where: {
       id: id,
     },
