@@ -7,12 +7,12 @@ import { AsistenPraktikum } from './entity/AsistenPraktikum.entity';
 import { BadRequestError } from './framework/error.interface';
 
 // @Data
-import { getUserByID } from './modules/data-repository/User.data';
+import { getUserByID } from './data-repository/User.data';
 
 // @Util
 import { JWTConfig } from './framework/JWTConfig.interface';
 import jwt from 'jsonwebtoken';
-import { getAsistenByUserID } from './modules/data-repository/Asisten.data';
+import { getAsistenByUserID } from './data-repository/Asisten.data';
 
 const JWT_SECRET_KEY: string = process.env.JWT_SECRET_KEY ?? 'sample-key';
 

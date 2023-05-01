@@ -1,11 +1,11 @@
 import { Admin } from '../../../entity/Admin.entity';
 import { LoginInterface } from '../Auth.interface';
-import * as AdminData from '../../data-repository/Admin.data';
+import { getAdminByEmail } from '../../../data-repository/Admin.data';
 import { BadRequestError } from '../../../framework/error.interface';
 import { signJWT } from './../../../jwt.config';
 
 export async function loginAdminLogic(data: LoginInterface) {
-  const admin: Admin = await AdminData.getAdminByEmail(data.email);
+  const admin: Admin = await getAdminByEmail(data.email);
 
   if (!admin) {
     throw new BadRequestError(`Email ${data.email} is not found!`);
