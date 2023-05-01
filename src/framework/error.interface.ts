@@ -36,3 +36,9 @@ export class InternalServerError extends BaseError {
     super(500, message);
   }
 }
+
+export class NotFoundError extends BaseError {
+  constructor(message: string) {
+    super(404, message);
+  }
+}

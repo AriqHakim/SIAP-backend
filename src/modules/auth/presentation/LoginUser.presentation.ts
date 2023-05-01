@@ -1,6 +1,8 @@
-import { Request, Response } from 'express';
+import { User } from '../../../entity/User.entity';
+import { ResponseBody } from '../../../framework/response.interface';
 import { LoginInterface } from '../Auth.interface';
 import { loginUserLogic } from '../logic/LoginUser.logic';
+import { Request, Response } from 'express';
 
 /**
  * Endpoint method untuk register
@@ -14,7 +16,7 @@ export async function loginUser(req: Request, res: Response) {
 
     const user = await loginUserLogic(data);
 
-    const result = {
+    const result: ResponseBody<{ access_token: string; user: User }> = {
       status: 200,
       message: 'login sucessful',
       data: user,
@@ -22,7 +24,7 @@ export async function loginUser(req: Request, res: Response) {
     res.send(result);
     return result;
   } catch (error) {
-    const result = {
+    const result: ResponseBody<{ success: boolean }> = {
       status: error.code,
       message: error.message,
       data: {

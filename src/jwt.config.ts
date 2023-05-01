@@ -7,12 +7,13 @@ import { AsistenPraktikum } from './entity/AsistenPraktikum.entity';
 import { BadRequestError } from './framework/error.interface';
 
 // @Data
-import { getUserByID } from './modules/data-repository/User.data';
+import { getUserByID } from './data-repository/User.data';
+import { getAdminByID } from './data-repository/Admin.data';
+import { getAsistenByUserID } from './data-repository/AsistenPraktikum.data';
 
 // @Util
 import { JWTConfig } from './framework/JWTConfig.interface';
 import jwt from 'jsonwebtoken';
-import { getAsistenByUserID } from './modules/data-repository/Asisten.data';
 
 const JWT_SECRET_KEY: string = process.env.JWT_SECRET_KEY ?? 'sample-key';
 
@@ -28,9 +29,7 @@ export const jwt_config_admin: JWTConfig = {
   secret_key: JWT_SECRET_KEY,
   async jwtDataAction(payload: JWTPayload): Promise<Admin> {
     try {
-      // return await AdminData.getAdminByID(payload.id);
-      //   search admin
-      return null;
+      return await getAdminByID(payload.id);
     } catch (err) {
       throw new BadRequestError(`Your user seems to be invalid or not found`);
     }

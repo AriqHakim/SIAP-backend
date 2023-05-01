@@ -3,8 +3,8 @@ import { RoleApproval } from '../../../entity/RoleApproval.entity';
 import { STATUS_APPROVAL } from '../../../entity/RoleApproval.entity';
 import { RegisterInterface } from '../Auth.interface';
 import { BadRequestError } from '../../../framework/error.interface';
-import * as UserData from '../../data-repository/User.data';
-import * as ApprovalData from '../../data-repository/RoleApproval.data';
+import { upsertUser } from '../../../data-repository/User.data';
+import { upsertApproval } from '../../../data-repository/RoleApproval.data';
 import bcrypt from 'bcrypt';
 
 export async function registerUser(data: RegisterInterface): Promise<boolean> {
@@ -28,8 +28,8 @@ export async function registerUser(data: RegisterInterface): Promise<boolean> {
     approval.user = user;
     approval.status = STATUS_APPROVAL.PENDING;
 
-    await ApprovalData.upsertApproval(approval);
+    await upsertApproval(approval);
   }
 
-  return (await UserData.upsertUser(user)) instanceof User;
+  return (await upsertUser(user)) instanceof User;
 }

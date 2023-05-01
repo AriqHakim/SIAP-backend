@@ -1,14 +1,14 @@
 import { User } from '../../../entity/User.entity';
 import { LoginInterface } from '../Auth.interface';
-import * as UserData from '../../data-repository/User.data';
-import { getAsistenByUserID } from '../../data-repository/Asisten.data';
+import { getUserByEmail } from '../../../data-repository/User.data';
+import { getAsistenByUserID } from '../../../data-repository/AsistenPraktikum.data';
 import bcrypt from 'bcrypt';
 import { BadRequestError } from '../../../framework/error.interface';
 import { signJWT } from './../../../jwt.config';
 import { AsistenPraktikum } from '../../../entity/AsistenPraktikum.entity';
 
 export async function loginUserLogic(data: LoginInterface) {
-  const user: User = await UserData.getUserByEmail(data.email);
+  const user: User = await getUserByEmail(data.email);
 
   if (!user) {
     throw new BadRequestError(`Email ${data.email} is not found!`);
