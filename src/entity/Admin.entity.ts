@@ -14,6 +14,7 @@ export class Admin {
   @Column({
     type: 'varchar',
     length: 50,
+    unique: true,
   })
   email: string;
 
