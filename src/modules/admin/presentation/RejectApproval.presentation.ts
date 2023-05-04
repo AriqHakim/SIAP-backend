@@ -23,10 +23,12 @@ export async function rejectApproval(req: Request, res: Response) {
     data.id = req.params.id;
 
     await rejectApprovalLogic(data);
-    const result: ResponseBody<boolean> = {
+    const result: ResponseBody<{ success: boolean }> = {
       status: 201,
       message: 'Approval has been rejected',
-      data: true,
+      data: {
+        success: true,
+      },
     };
 
     res.send(result);
