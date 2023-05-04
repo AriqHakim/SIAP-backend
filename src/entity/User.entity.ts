@@ -9,6 +9,7 @@ import { RoleApproval } from './RoleApproval.entity';
 import { AsistenPraktikum } from './AsistenPraktikum.entity';
 import { Presensi } from './Presensi.entity';
 import { Perizinan } from './Perizinan.entity';
+import { UserKelas } from './UserKelas.entity';
 
 @Entity('users')
 export class User {
@@ -58,4 +59,7 @@ export class User {
 
   @OneToMany(() => Perizinan, (p) => p.user)
   perizinan?: Perizinan[];
+
+  @OneToMany(() => UserKelas, (u) => u.user)
+  userKelas?: UserKelas[];
 }

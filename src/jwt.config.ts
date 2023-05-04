@@ -43,8 +43,8 @@ export const jwt_config_user: JWTConfig = {
       const user: User = await getUserByID(payload.id);
       const asisten: AsistenPraktikum = await getAsistenByUserID(payload.id);
       return {
-        user: user,
-        asisten: asisten,
+        user,
+        asisten,
       };
     } catch (err) {
       throw new BadRequestError(`Your user seems to be invalid or not found`);
