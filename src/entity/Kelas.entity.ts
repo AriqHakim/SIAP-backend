@@ -9,6 +9,7 @@ import {
 import { AsistenPraktikum } from './AsistenPraktikum.entity';
 import { Broadcast } from './Broadcast.entity';
 import { Pertemuan } from './Pertemuan.entity';
+import { UserKelas } from './UserKelas.entity';
 
 @Entity('kelas')
 export class Kelas {
@@ -46,4 +47,7 @@ export class Kelas {
 
   @OneToMany(() => Pertemuan, (p) => p.kelas)
   pertemuan?: Pertemuan[];
+
+  @OneToMany(() => UserKelas, (u) => u.kelas)
+  userKelas?: UserKelas[];
 }
