@@ -5,9 +5,9 @@ import { UnauthorizedError } from '../../../framework/error.interface';
 import { extractDataFromJWT } from '../../../framework/JWTExtractor';
 import { User } from '../../../entity/User.entity';
 import { AsistenPraktikum } from '../../../entity/AsistenPraktikum.entity';
-import { parseQueryToInt } from '../../../framework/utils';
 import { ResponseBody } from '../../../framework/response.interface';
 import { GetAllKelasLogic } from '../logic/GetAllKelas.logic';
+import { Kelas } from '../../../entity/Kelas.entity';
 
 export async function GetAllKelas(req: Request, res: Response) {
   try {
@@ -29,7 +29,13 @@ export async function GetAllKelas(req: Request, res: Response) {
     data.user = auth.user;
     data.asisten = auth.asisten;
 
-    const result = await GetAllKelasLogic(data);
+    const result: ResponseBody<{ kelas: Kelas[]; owned: Kelas[] }> = {
+      status: 200,
+      message: 'Data Kelas berhasil diambil',
+      data: {
+        ...(await GetAllKelasLogic(data)),
+      },
+    };
 
     res.send(result);
     return result;
