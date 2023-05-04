@@ -6,6 +6,21 @@ const repository = AppDataSource.getRepository(Kelas);
 
 export async function GetAllKelasByUserID(userId: string) {
   const options: FindManyOptions<Kelas> = {
+    select: {
+      id: true,
+      judul: true,
+      deskripsi: true,
+      kode: false,
+      userKelas: {
+        user: {
+          id: false,
+          email: false,
+          name: false,
+          password: false,
+          npm: false,
+        },
+      },
+    },
     where: {
       userKelas: {
         user: {
@@ -13,7 +28,7 @@ export async function GetAllKelasByUserID(userId: string) {
         },
       },
     },
-    relations: ['userKelas', 'userKelas.kelas'],
+    relations: ['userKelas', 'userKelas.user'],
   };
 
   return await repository.find(options);
@@ -21,6 +36,16 @@ export async function GetAllKelasByUserID(userId: string) {
 
 export async function GetAllKelasByAsistenID(asistenId: string) {
   const options: FindManyOptions<Kelas> = {
+    select: {
+      id: true,
+      judul: true,
+      deskripsi: true,
+      kode: false,
+      asisten: {
+        id: false,
+        instansi: false,
+      },
+    },
     where: {
       asisten: {
         id: asistenId,
