@@ -41,17 +41,33 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
       judul: true,
       deskripsi: true,
       kode: false,
-      asisten: {
+      asistenKelas: {
         id: false,
-        instansi: false,
+        asisten: {
+          id: true,
+          instansi: false,
+          user: {
+            id: true,
+            email: false,
+            name: true,
+            password: false,
+            npm: true,
+          },
+        },
       },
     },
     where: {
-      asisten: {
-        id: asistenId,
+      asistenKelas: {
+        asisten: {
+          id: asistenId,
+        },
       },
     },
-    relations: ['asisten'],
+    relations: [
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
   };
 
   return await repository.find(options);

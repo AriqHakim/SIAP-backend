@@ -27,6 +27,9 @@ import { Presensi1680942631095 } from './migration/1680942631095-Presensi';
 import { Perizinan } from './entity/Perizinan.entity';
 import { Perizinan1680943216115 } from './migration/1680943216115-Perizinan';
 import { AlterEmail1682998991704 } from './migration/1682998991704-AlterEmail';
+import { KelasAsisten } from './entity/KelasAsisten.entity';
+import { KelasAsisten1683211544604 } from './migration/1683211544604-KelasAsisten';
+import { RemoveOneToManyAsistenKelas1683211761622 } from './migration/1683211761622-RemoveOneToManyAsistenKelas';
 
 const AppDataSource: DataSource = new DataSource({
   type: 'mysql',
@@ -48,6 +51,7 @@ const AppDataSource: DataSource = new DataSource({
     Pertemuan,
     Presensi,
     Perizinan,
+    KelasAsisten,
   ],
   migrations: [
     Admin1680922513935,
@@ -63,6 +67,8 @@ const AppDataSource: DataSource = new DataSource({
     Presensi1680942631095,
     Perizinan1680943216115,
     AlterEmail1682998991704,
+    KelasAsisten1683211544604,
+    RemoveOneToManyAsistenKelas1683211761622,
   ],
   migrationsTableName: 'migrations',
   synchronize: false,
