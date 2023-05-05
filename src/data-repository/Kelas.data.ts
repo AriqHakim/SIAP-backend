@@ -1,6 +1,6 @@
 import AppDataSource from '../orm.config';
 import { Kelas } from '../entity/Kelas.entity';
-import { FindManyOptions } from 'typeorm';
+import { FindManyOptions, FindOneOptions } from 'typeorm';
 
 const repository = AppDataSource.getRepository(Kelas);
 
@@ -75,4 +75,14 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
 
 export async function upsertKelas(data: Kelas) {
   return await repository.save(data);
+}
+
+export async function getKelasByKode(kode: string) {
+  const options: FindOneOptions<Kelas> = {
+    where: {
+      kode: kode,
+    },
+  };
+
+  return await repository.findOne(options);
 }

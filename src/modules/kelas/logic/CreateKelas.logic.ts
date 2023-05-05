@@ -1,7 +1,10 @@
 import { randomString } from '../../../framework/utils';
 import { Kelas } from '../../../entity/Kelas.entity';
 import { CreateKelasInterface } from '../Kelas.interface';
-import { upsertKelas } from '../../../data-repository/Kelas.data';
+import {
+  getKelasByKode,
+  upsertKelas,
+} from '../../../data-repository/Kelas.data';
 import { upsertKelasAsisten } from '../../../data-repository/KelasAsisten.data';
 import { KelasAsisten } from '../../../entity/KelasAsisten.entity';
 
@@ -9,7 +12,17 @@ export async function CreateKelasLogic(data: CreateKelasInterface) {
   const kelas: Kelas = new Kelas();
   kelas.judul = data.judul;
   kelas.deskripsi = data.deskripsi;
-  kelas.kode = randomString(6);
+  let tempKelas: Kelas = null;
+
+  let kodeFlag = true;
+  while (kodeFlag) {
+    kelas.kode = randomString(6);
+    tempKelas = await getKelasByKode(kelas.kode);
+    if (!tempKelas) {
+      kodeFlag = false;
+      break;
+    }
+  }
 
   await upsertKelas(kelas);
   const asisten = [data.asisten, ...data.otherAsisten];
