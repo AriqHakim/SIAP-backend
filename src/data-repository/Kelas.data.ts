@@ -10,14 +10,21 @@ export async function GetAllKelasByUserID(userId: string) {
       id: true,
       judul: true,
       deskripsi: true,
-      kode: false,
       userKelas: {
-        user: {
-          id: false,
-          email: false,
-          name: false,
-          password: false,
-          npm: false,
+        id: false,
+      },
+      asistenKelas: {
+        id: true,
+        asisten: {
+          id: true,
+          instansi: false,
+          user: {
+            id: true,
+            email: false,
+            name: true,
+            password: false,
+            npm: false,
+          },
         },
       },
     },
@@ -28,7 +35,13 @@ export async function GetAllKelasByUserID(userId: string) {
         },
       },
     },
-    relations: ['userKelas', 'userKelas.user'],
+    relations: [
+      'userKelas',
+      'userKelas.user',
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
   };
 
   return await repository.find(options);
@@ -63,11 +76,7 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
         },
       },
     },
-    relations: [
-      'asistenKelas',
-      'asistenKelas.asisten',
-      'asistenKelas.asisten.user',
-    ],
+    relations: ['asistenKelas', 'asistenKelas.asisten'],
   };
 
   return await repository.find(options);
