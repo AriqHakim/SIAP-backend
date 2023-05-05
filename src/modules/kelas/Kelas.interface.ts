@@ -13,3 +13,8 @@ export class CreateKelasInterface {
   deskripsi: string;
   otherAsisten: AsistenPraktikum[];
 }
+
+export class JoinKelasInterface {
+  user: User;
+  kode: string;
+}
