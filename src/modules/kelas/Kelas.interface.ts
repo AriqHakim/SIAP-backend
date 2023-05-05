@@ -9,7 +9,7 @@ export class GetAllKelasInterface {
 export class CreateKelasInterface {
   user: User;
   asisten: AsistenPraktikum;
-  nama: string;
+  judul: string;
   deskripsi: string;
-  OtherAsisten: AsistenPraktikum[];
+  otherAsisten: AsistenPraktikum[];
 }

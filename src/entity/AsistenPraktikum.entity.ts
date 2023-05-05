@@ -26,7 +26,7 @@ export class AsistenPraktikum {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user?: User;
 
   @OneToMany(() => KelasAsisten, (k) => k.asisten)
   asistenKelas?: KelasAsisten[];

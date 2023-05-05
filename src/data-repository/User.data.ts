@@ -12,14 +12,6 @@ export async function upsertUser(user: User): Promise<User> {
 
 export async function getUserByEmail(email: string) {
   const options: FindManyOptions<User> = {
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      npm: true,
-      noTelp: true,
-      password: false,
-    },
     where: {
       email: email,
     },
