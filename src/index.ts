@@ -10,6 +10,7 @@ import authRouter from './modules/auth/Auth.route';
 import adminRouter from './modules/admin/Admin.route';
 import kelasRouter from './modules/kelas/Kelas.route';
 import asistenRouter from './modules/asisten/Asisten.route';
+import userRouter from './modules/user/User.route';
 
 const PORT: number = parseInt(process.env.PORT || '3000');
 
@@ -36,6 +37,7 @@ async function main() {
   server.use('/admin', adminRouter);
   server.use('/kelas', kelasRouter);
   server.use('/asisten', asistenRouter);
+  server.use('/user', userRouter);
 }
 
 main();
