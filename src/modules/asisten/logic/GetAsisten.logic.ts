@@ -1,6 +1,8 @@
-import { GetAsistenWithQuery } from '../../../data-repository/AsistenPraktikum.data';
+import { getAsistenWithQuery } from '../../../data-repository/AsistenPraktikum.data';
 import { GetAsistenInterface } from '../Asisten.interface';
 
-export async function GetAsistenLogic(data: GetAsistenInterface) {
-  return await GetAsistenWithQuery(data.offset, data.limit, data.q);
+export async function getAsistenLogic(data: GetAsistenInterface) {
+  data.limit = data.limit ?? 10;
+  data.offset = data.offset ?? 0;
+  return await getAsistenWithQuery(data.offset, data.limit, data.q);
 }

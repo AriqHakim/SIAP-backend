@@ -3,7 +3,7 @@ import { GetAsistenInterface } from '../Asisten.interface';
 import { asistenChecker } from '../../../framework/AuthChecker';
 import { ResponseBody } from '../../../framework/response.interface';
 import { parseQueryToInt } from '../../../framework/utils';
-import { GetAsistenLogic } from '../logic/GetAsisten.logic';
+import { getAsistenLogic } from '../logic/GetAsisten.logic';
 import { PaginationResult } from '../../../framework/pagination.interface';
 import { AsistenPraktikum } from '../../../entity/AsistenPraktikum.entity';
 
@@ -22,7 +22,7 @@ export async function GetAsisten(req: Request, res: Response) {
     const result: ResponseBody<PaginationResult<AsistenPraktikum>> = {
       status: 200,
       message: 'Asisten data successfully fetched',
-      data: await GetAsistenLogic(data),
+      data: await getAsistenLogic(data),
     };
 
     res.send(result);

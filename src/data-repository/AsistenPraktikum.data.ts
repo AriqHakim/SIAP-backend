@@ -34,7 +34,7 @@ export async function getAsistenByUserID(userId: string) {
   });
 }
 
-export async function GetAsistenWithQuery(
+export async function getAsistenWithQuery(
   offset: number,
   limit: number,
   query: string,
