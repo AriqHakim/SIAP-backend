@@ -11,5 +11,5 @@ export class CreateKelasInterface {
   asisten: AsistenPraktikum;
   nama: string;
   deskripsi: string;
-  OtherUser: User[];
+  OtherAsisten: AsistenPraktikum[];
 }
