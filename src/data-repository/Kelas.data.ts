@@ -72,3 +72,7 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
 
   return await repository.find(options);
 }
+
+export async function upsertKelas(data: Kelas) {
+  return await repository.save(data);
+}
