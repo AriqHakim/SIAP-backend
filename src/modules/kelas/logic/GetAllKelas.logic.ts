@@ -1,15 +1,22 @@
 import { Kelas } from '../../../entity/Kelas.entity';
 import { GetAllKelasInterface } from '../Kelas.interface';
 import {
-  GetAllKelasByAsistenID,
-  GetAllKelasByUserID,
+  getAllKelasByAsistenID,
+  getAllKelasByUserID,
 } from '../../../data-repository/Kelas.data';
+import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
 
 export async function GetAllKelasLogic(data: GetAllKelasInterface) {
-  const kelas: Kelas[] = await GetAllKelasByUserID(data.user.id);
+  const kelas: Kelas[] = await getAllKelasByUserID(data.user.id);
   const owned: Kelas[] = data.asisten
-    ? await GetAllKelasByAsistenID(data.asisten.id)
+    ? await getAllKelasByAsistenID(data.asisten.id)
     : null;
+
+  if (data.asisten) {
+    for (let i = 1; i < owned.length; i++) {
+      owned[i].asistenKelas = await getAsistenByKelas(owned[i].id);
+    }
+  }
 
   return {
     kelas,

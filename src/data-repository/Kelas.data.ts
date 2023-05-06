@@ -4,7 +4,7 @@ import { FindManyOptions, FindOneOptions } from 'typeorm';
 
 const repository = AppDataSource.getRepository(Kelas);
 
-export async function GetAllKelasByUserID(userId: string) {
+export async function getAllKelasByUserID(userId: string) {
   const options: FindManyOptions<Kelas> = {
     select: {
       id: true,
@@ -47,7 +47,7 @@ export async function GetAllKelasByUserID(userId: string) {
   return await repository.find(options);
 }
 
-export async function GetAllKelasByAsistenID(asistenId: string) {
+export async function getAllKelasByAsistenID(asistenId: string) {
   const options: FindManyOptions<Kelas> = {
     select: {
       id: true,
@@ -55,7 +55,7 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
       deskripsi: true,
       kode: false,
       asistenKelas: {
-        id: false,
+        id: true,
         asisten: {
           id: true,
           instansi: false,
@@ -64,7 +64,7 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
             email: false,
             name: true,
             password: false,
-            npm: true,
+            npm: false,
           },
         },
       },
@@ -76,7 +76,11 @@ export async function GetAllKelasByAsistenID(asistenId: string) {
         },
       },
     },
-    relations: ['asistenKelas', 'asistenKelas.asisten'],
+    relations: [
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
   };
 
   return await repository.find(options);
