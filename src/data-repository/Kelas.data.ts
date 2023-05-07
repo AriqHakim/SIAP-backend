@@ -99,3 +99,13 @@ export async function getKelasByKode(kode: string) {
 
   return await repository.findOne(options);
 }
+
+export async function getKelasByJudul(judul: string) {
+  const options: FindOneOptions<Kelas> = {
+    where: {
+      judul: judul,
+    },
+  };
+
+  return await repository.findOne(options);
+}

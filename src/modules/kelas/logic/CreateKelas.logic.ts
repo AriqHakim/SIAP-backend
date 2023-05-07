@@ -2,16 +2,25 @@ import { randomString } from '../../../framework/utils';
 import { Kelas } from '../../../entity/Kelas.entity';
 import { CreateKelasInterface } from '../Kelas.interface';
 import {
+  getKelasByJudul,
   getKelasByKode,
   upsertKelas,
 } from '../../../data-repository/Kelas.data';
 import { upsertKelasAsisten } from '../../../data-repository/KelasAsisten.data';
 import { KelasAsisten } from '../../../entity/KelasAsisten.entity';
+import { getAsistenByID } from '../../../data-repository/AsistenPraktikum.data';
+import { BadRequestError } from '../../../framework/error.interface';
 
 export async function CreateKelasLogic(data: CreateKelasInterface) {
   const kelas: Kelas = new Kelas();
   kelas.judul = data.judul;
   kelas.deskripsi = data.deskripsi;
+
+  const checkName = await getKelasByJudul(kelas.judul);
+  if (checkName) {
+    throw new BadRequestError('Nama kelas sudah dipakai!');
+  }
+
   let tempKelas: Kelas = null;
 
   let kodeFlag = true;
@@ -24,14 +33,23 @@ export async function CreateKelasLogic(data: CreateKelasInterface) {
     }
   }
 
-  await upsertKelas(kelas);
   const asisten = [data.asisten, ...data.otherAsisten];
-  asisten.forEach(async (value) => {
+
+  for (let i = 0; i < asisten.length; i++) {
+    const temp = await getAsistenByID(asisten[i].id);
+    if (!temp) {
+      throw new BadRequestError('Asisten tidak terdaftar');
+    }
+  }
+
+  await upsertKelas(kelas);
+
+  for (let i = 0; i < asisten.length; i++) {
     const asistenKelas = new KelasAsisten();
-    asistenKelas.asisten = value;
+    asistenKelas.asisten = asisten[i];
     asistenKelas.kelas = kelas;
     await upsertKelasAsisten(asistenKelas);
-  });
+  }
 
   return kelas instanceof Kelas;
 }

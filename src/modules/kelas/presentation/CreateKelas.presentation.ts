@@ -15,11 +15,13 @@ export async function CreateKelas(req: Request, res: Response) {
     data.deskripsi = req.body.deskripsi;
     data.otherAsisten = req.body.otherAsisten;
 
+    const insert = await CreateKelasLogic(data);
+
     const result: ResponseBody<{ success: boolean }> = {
       status: 201,
       message: 'Kelas berhasil dibuat',
       data: {
-        success: await CreateKelasLogic(data),
+        success: insert,
       },
     };
 
