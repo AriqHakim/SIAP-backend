@@ -13,7 +13,7 @@ export async function GetAllKelasLogic(data: GetAllKelasInterface) {
     : null;
 
   if (data.asisten) {
-    for (let i = 1; i < owned.length; i++) {
+    for (let i = 0; i < owned.length; i++) {
       owned[i].asistenKelas = await getAsistenByKelas(owned[i].id);
     }
   }
