@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
 import { asistenChecker } from '../../../framework/AuthChecker';
 import { ResponseBody } from '../../../framework/response.interface';
-import { createPertemuanInterface } from '../pertemuan.interface';
+import { createPertemuanInterface } from '../Pertemuan.interface';
+import { dateConverter } from '../../../framework/utils';
+import { createPertemuanLogic } from '../logic/createPertemuan.logic';
+import { Pertemuan } from '../../../entity/Pertemuan.entity';
 
 export async function createPertemuan(req: Request, res: Response) {
   try {
@@ -11,12 +14,17 @@ export async function createPertemuan(req: Request, res: Response) {
     data.asisten = auth.asisten;
     data.user = auth.user;
 
-    const result: ResponseBody<{ success: boolean }> = {
+    data.kelasId = req.params.kelasId;
+    data.indexPertemuan = parseInt(req.body.indexPertemuan);
+    data.judul = req.body.judul;
+    data.startDate = dateConverter(req.body.startDate);
+
+    const pertemuan = await createPertemuanLogic(data);
+
+    const result: ResponseBody<Pertemuan> = {
       status: 201,
       message: 'kelas berhasil dibuat!',
-      data: {
-        success: true,
-      },
+      data: pertemuan,
     };
 
     res.send(result);

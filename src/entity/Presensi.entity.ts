@@ -23,11 +23,13 @@ export class Presensi {
   @Column({
     type: 'varchar',
     length: 255,
+    nullable: true,
   })
   bukti: string;
 
   @Column({
     type: 'datetime',
+    nullable: true,
   })
   date: Date;
 

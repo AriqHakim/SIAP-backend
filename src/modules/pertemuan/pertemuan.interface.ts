@@ -5,7 +5,7 @@ export class createPertemuanInterface {
   user: User;
   asisten: AsistenPraktikum;
   kelasId: string;
-  indexPert: number;
+  indexPertemuan: number;
   judul: string;
   startDate: Date;
 }
