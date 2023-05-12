@@ -4,7 +4,6 @@ import { ResponseBody } from '../../../framework/response.interface';
 import { createPertemuanInterface } from '../Pertemuan.interface';
 import { dateConverter } from '../../../framework/utils';
 import { createPertemuanLogic } from '../logic/createPertemuan.logic';
-import { Pertemuan } from '../../../entity/Pertemuan.entity';
 
 export async function createPertemuan(req: Request, res: Response) {
   try {
@@ -19,12 +18,14 @@ export async function createPertemuan(req: Request, res: Response) {
     data.judul = req.body.judul;
     data.startDate = dateConverter(req.body.startDate);
 
-    const pertemuan = await createPertemuanLogic(data);
+    await createPertemuanLogic(data);
 
-    const result: ResponseBody<Pertemuan> = {
+    const result: ResponseBody<{ success: boolean }> = {
       status: 201,
       message: 'kelas berhasil dibuat!',
-      data: pertemuan,
+      data: {
+        success: true,
+      },
     };
 
     res.send(result);

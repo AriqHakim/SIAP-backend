@@ -20,3 +20,13 @@ export async function getPertemuanByIndex(kelasId: string, idx: number) {
   };
   return await repository.findOne(options);
 }
+
+export async function getPertemuanByID(id: string) {
+  const options: FindOneOptions<Pertemuan> = {
+    where: {
+      id: id,
+    },
+    relations: ['kelas'],
+  };
+  return await repository.findOne(options);
+}

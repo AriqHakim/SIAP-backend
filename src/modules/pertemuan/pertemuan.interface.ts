@@ -9,3 +9,12 @@ export class createPertemuanInterface {
   judul: string;
   startDate: Date;
 }
+
+export class getPertemuanByIDInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+  id: string;
+  limit: number;
+  offset: number;
+}
