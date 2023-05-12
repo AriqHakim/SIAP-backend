@@ -2,6 +2,7 @@ import { Request } from 'express';
 import AppDataSource from '../orm.config';
 import { EntityTarget, FindManyOptions } from 'typeorm';
 import { BadRequestError } from './error.interface';
+import { DateTime } from 'luxon';
 
 export async function countTotalData<T>(
   entity: EntityTarget<T>,
@@ -31,4 +32,18 @@ export function randomString(length: number): string {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+
+export function dateConverter(str: string, options?: any) {
+  const date = DateTime.fromFormat(
+    str,
+    'dd/MM/yyyy hh:mm:ss',
+    options,
+  ).toJSDate();
+  if (date === undefined) {
+    throw new BadRequestError(
+      `Field date format invalid, must be dd/MM/yyyy h:mm:ss`,
+    );
+  }
+  return date;
 }

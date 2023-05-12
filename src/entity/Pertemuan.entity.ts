@@ -22,11 +22,6 @@ export class Pertemuan {
   judul: string;
 
   @Column({
-    type: 'text',
-  })
-  deskripsi: string;
-
-  @Column({
     name: 'start_date',
     type: 'datetime',
   })

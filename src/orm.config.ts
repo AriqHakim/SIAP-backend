@@ -30,6 +30,8 @@ import { AlterEmail1682998991704 } from './migration/1682998991704-AlterEmail';
 import { KelasAsisten } from './entity/KelasAsisten.entity';
 import { KelasAsisten1683211544604 } from './migration/1683211544604-KelasAsisten';
 import { RemoveOneToManyAsistenKelas1683211761622 } from './migration/1683211761622-RemoveOneToManyAsistenKelas';
+import { deleteDeskripsiColumn1683770502574 } from './migration/1683770502574-delete-deskripsi-column';
+import { alterNullablePresensi1683896570987 } from './migration/1683896570987-alter-nullable-presensi';
 
 const AppDataSource: DataSource = new DataSource({
   type: 'mysql',
@@ -69,6 +71,8 @@ const AppDataSource: DataSource = new DataSource({
     AlterEmail1682998991704,
     KelasAsisten1683211544604,
     RemoveOneToManyAsistenKelas1683211761622,
+    deleteDeskripsiColumn1683770502574,
+    alterNullablePresensi1683896570987,
   ],
   migrationsTableName: 'migrations',
   synchronize: false,

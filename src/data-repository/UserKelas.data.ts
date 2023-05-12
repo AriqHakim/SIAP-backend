@@ -1,6 +1,6 @@
 import AppDataSource from '../orm.config';
 import { UserKelas } from '../entity/UserKelas.entity';
-import { FindOneOptions } from 'typeorm';
+import { FindManyOptions, FindOneOptions } from 'typeorm';
 
 const repository = AppDataSource.getRepository(UserKelas);
 
@@ -21,4 +21,17 @@ export async function searchUserKelas(kelasId: string, userId: string) {
     relations: ['user', 'kelas'],
   };
   return await repository.findOne(options);
+}
+
+export async function getUserKelasByKelasID(id: string) {
+  const options: FindManyOptions<UserKelas> = {
+    where: {
+      kelas: {
+        id: id,
+      },
+    },
+    relations: ['user', 'kelas'],
+  };
+
+  return await repository.find(options);
 }
