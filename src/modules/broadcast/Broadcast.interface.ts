@@ -11,3 +11,9 @@ export class createBroadcastInterface {
   attachments: Attachment[];
   kelasId: string;
 }
+
+export class getBroadcastByKelasInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+}

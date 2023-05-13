@@ -30,6 +30,7 @@ export async function createBroadcastLogic(data: createBroadcastInterface) {
   broadcast.deskripsi = data.deskripsi;
   broadcast.date = data.date;
   broadcast.owner = data.asisten;
+  broadcast.kelas = kelas;
 
   const result = await upsertBroadcast(broadcast);
 
