@@ -110,7 +110,7 @@ export async function getKelasByJudul(judul: string) {
   return await repository.findOne(options);
 }
 
-export async function getAllKelasByID(id: string) {
+export async function getKelasByID(id: string) {
   return await repository.findOne({
     where: {
       id: id,

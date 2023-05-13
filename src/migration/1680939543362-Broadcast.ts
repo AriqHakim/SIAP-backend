@@ -13,15 +13,9 @@ export class Broadcast1680939543362 implements MigrationInterface {
     await queryRunner.query(
       `ALTER TABLE \`broadcast\` ADD CONSTRAINT \`FK_48efea565167b4261378bbfb942\` FOREIGN KEY (\`owner_id\`) REFERENCES \`asisten_praktikum\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
-    await queryRunner.query(
-      `ALTER TABLE \`broadcast\` ADD CONSTRAINT \`FK_3a0650b580ece036e5b3fd54a85\` FOREIGN KEY (\`kategori_id\`) REFERENCES \`kategori\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `ALTER TABLE \`broadcast\` DROP FOREIGN KEY \`FK_3a0650b580ece036e5b3fd54a85\``,
-    );
     await queryRunner.query(
       `ALTER TABLE \`broadcast\` DROP FOREIGN KEY \`FK_48efea565167b4261378bbfb942\``,
     );

@@ -10,7 +10,7 @@ import { Broadcast } from './Broadcast.entity';
 @Entity('attachment')
 export class Attachment {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column({
     type: 'varchar',
