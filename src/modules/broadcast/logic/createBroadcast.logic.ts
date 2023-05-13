@@ -2,14 +2,27 @@ import { upsertBroadcast } from '../../../data-repository/Broadcast.data';
 import { createBroadcastInterface } from '../Broadcast.interface';
 import { Broadcast } from '../../../entity/Broadcast.entity';
 import { getKelasByID } from '../../../data-repository/Kelas.data';
-import { NotFoundError } from '../../../framework/error.interface';
+import {
+  BadRequestError,
+  NotFoundError,
+} from '../../../framework/error.interface';
 import { Attachment } from '../../../entity/Attachment.entity';
 import { upsertAttachment } from '../../../data-repository/Attachment.data';
+import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
 
 export async function createBroadcastLogic(data: createBroadcastInterface) {
   const kelas = await getKelasByID(data.kelasId);
   if (!kelas) {
     throw new NotFoundError('Kelas tidak ditemukan');
+  }
+
+  const asistenKelas = await getAsistenByKelas(kelas.id);
+  let isOwned = false;
+  for (let i = 0; i < asistenKelas.length; i++) {
+    isOwned = asistenKelas[i].asisten.id === data.asisten.id;
+  }
+  if (!isOwned) {
+    throw new BadRequestError('Anda bukan pemilik kelas');
   }
 
   const broadcast = new Broadcast();

@@ -14,11 +14,21 @@ import { dateConverter } from '../../../framework/utils';
 import { getUserKelasByKelasID } from '../../../data-repository/UserKelas.data';
 import { upsertPresensi } from '../../../data-repository/Presensi.data';
 import { Presensi, STATUS_KEHADIRAN } from '../../../entity/Presensi.entity';
+import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
 
 export async function createPertemuanLogic(data: createPertemuanInterface) {
   const kelas = await getKelasByID(data.kelasId);
   if (!kelas) {
     throw new NotFoundError('Kelas tidak ditemukan!');
+  }
+
+  const asistenKelas = await getAsistenByKelas(kelas.id);
+  let isOwned = false;
+  for (let i = 0; i < asistenKelas.length; i++) {
+    isOwned = asistenKelas[i].asisten.id === data.asisten.id;
+  }
+  if (!isOwned) {
+    throw new BadRequestError('Anda bukan pemilik kelas');
   }
 
   if (await getPertemuanByIndex(kelas.id, data.indexPertemuan)) {

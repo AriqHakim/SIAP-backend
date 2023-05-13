@@ -7,6 +7,8 @@ import {
   getPresensiByPertemuan,
   getPresensiByUserKelas,
 } from '../../../data-repository/Presensi.data';
+import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
+import { BadRequestError } from '../../../framework/error.interface';
 
 export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
   const result: Pertemuan = await getPertemuanByID(data.id);
@@ -16,6 +18,14 @@ export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
   };
 
   if (data.asisten) {
+    const asistenKelas = await getAsistenByKelas(data.kelasId);
+    let isOwned = false;
+    for (let i = 0; i < asistenKelas.length; i++) {
+      isOwned = asistenKelas[i].asisten.id === data.asisten.id;
+    }
+    if (!isOwned) {
+      throw new BadRequestError('Anda bukan pemilik kelas');
+    }
     presensi = await getPresensiByPertemuan(data.id, data.limit, data.offset);
   } else {
     presensi.data = [await getPresensiByUserKelas(data.kelasId, data.user.id)];
