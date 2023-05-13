@@ -117,3 +117,29 @@ export async function getKelasByID(id: string) {
     },
   });
 }
+
+export async function getKelasByIDwithAsisten(id: string) {
+  return await repository.findOne({
+    select: {
+      asistenKelas: {
+        id: true,
+        asisten: {
+          id: true,
+          user: {
+            id: true,
+            name: true,
+            password: false,
+          },
+        },
+      },
+    },
+    where: {
+      id: id,
+    },
+    relations: [
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
+  });
+}
