@@ -14,8 +14,6 @@ import { Kelas } from './entity/Kelas.entity';
 import { Kelas1680928192303 } from './migration/1680928192303-Kelas';
 import { UserKelas } from './entity/UserKelas.entity';
 import { UserKelas1680928495302 } from './migration/1680928495302-UserKelas';
-import { Kategori } from './entity/Kategori.entity';
-import { Kategori1680928792339 } from './migration/1680928792339-Kategori';
 import { Broadcast } from './entity/Broadcast.entity';
 import { Broadcast1680939543362 } from './migration/1680939543362-Broadcast';
 import { Attachment } from './entity/Attachment.entity';
@@ -47,7 +45,6 @@ const AppDataSource: DataSource = new DataSource({
     AsistenPraktikum,
     Kelas,
     UserKelas,
-    Kategori,
     Broadcast,
     Attachment,
     Pertemuan,
@@ -62,7 +59,6 @@ const AppDataSource: DataSource = new DataSource({
     AsistenPraktikum1680924698192,
     Kelas1680928192303,
     UserKelas1680928495302,
-    Kategori1680928792339,
     Broadcast1680939543362,
     Attachment1680940858600,
     Pertemuan1680941170378,

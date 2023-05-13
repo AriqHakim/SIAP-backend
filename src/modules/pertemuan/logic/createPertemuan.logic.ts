@@ -1,4 +1,4 @@
-import { getAllKelasByID } from '../../../data-repository/Kelas.data';
+import { getKelasByID } from '../../../data-repository/Kelas.data';
 import { createPertemuanInterface } from '../Pertemuan.interface';
 import {
   BadRequestError,
@@ -16,7 +16,7 @@ import { upsertPresensi } from '../../../data-repository/Presensi.data';
 import { Presensi, STATUS_KEHADIRAN } from '../../../entity/Presensi.entity';
 
 export async function createPertemuanLogic(data: createPertemuanInterface) {
-  const kelas = await getAllKelasByID(data.kelasId);
+  const kelas = await getKelasByID(data.kelasId);
   if (!kelas) {
     throw new NotFoundError('Kelas tidak ditemukan!');
   }
