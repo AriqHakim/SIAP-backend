@@ -2,11 +2,7 @@ import { upsertBroadcast } from '../../../data-repository/Broadcast.data';
 import { createBroadcastInterface } from '../Broadcast.interface';
 import { Broadcast } from '../../../entity/Broadcast.entity';
 import { getKelasByID } from '../../../data-repository/Kelas.data';
-import {
-  BadRequestError,
-  NotFoundError,
-} from '../../../framework/error.interface';
-import { getAsistenByID } from '../../../data-repository/AsistenPraktikum.data';
+import { NotFoundError } from '../../../framework/error.interface';
 import { Attachment } from '../../../entity/Attachment.entity';
 import { upsertAttachment } from '../../../data-repository/Attachment.data';
 
@@ -16,16 +12,11 @@ export async function createBroadcastLogic(data: createBroadcastInterface) {
     throw new NotFoundError('Kelas tidak ditemukan');
   }
 
-  const asisten = await getAsistenByID(data.asisten.id);
-  if (!asisten) {
-    throw new BadRequestError('Your request not authorized!');
-  }
-
   const broadcast = new Broadcast();
   broadcast.judul = data.judul;
   broadcast.deskripsi = data.deskripsi;
   broadcast.date = data.date;
-  broadcast.owner = asisten;
+  broadcast.owner = data.asisten;
 
   const result = await upsertBroadcast(broadcast);
 
