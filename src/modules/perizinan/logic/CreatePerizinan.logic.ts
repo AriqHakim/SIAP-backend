@@ -1,6 +1,5 @@
 import { createPerizinanInterface } from '../Perizinan.interface';
 import { uploadToFirebase } from '../../../framework/MulterToFirebase';
-import { dateConverter } from '../../../framework/utils';
 import { Perizinan } from '../../../entity/Perizinan.entity';
 import { getPertemuanByID } from '../../../data-repository/Pertemuan.data';
 import { BadRequestError } from '../../../framework/error.interface';
@@ -8,7 +7,6 @@ import { getKelasByID } from '../../../data-repository/Kelas.data';
 import { upsertPerizinan } from '../../../data-repository/Perizinan.data';
 import { getPresensiByPertemuanUser } from '../../../data-repository/Presensi.data';
 import { upsertPresensi } from '../../../data-repository/Presensi.data';
-import { DateTime } from 'luxon';
 
 export async function createPerizinanLogic(data: createPerizinanInterface) {
   const kelas = await getKelasByID(data.kelasId);
