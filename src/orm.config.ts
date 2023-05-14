@@ -72,8 +72,8 @@ const AppDataSource: DataSource = new DataSource({
   ],
   migrationsTableName: 'migrations',
   synchronize: false,
-  logging: true,
-  migrationsRun: true,
+  logging: false,
+  migrationsRun: false,
 });
 
 export default AppDataSource;
