@@ -60,3 +60,32 @@ export async function getPresensiByUserKelas(kelasId: string, userId: string) {
 
   return await repository.findOne(options);
 }
+
+export async function getPresensiByPertemuanUser(
+  pertemuanId: string,
+  userId: string,
+) {
+  const options: FindOneOptions<Presensi> = {
+    select: {
+      pertemuan: {
+        id: false,
+      },
+      user: {
+        id: true,
+        name: true,
+        npm: true,
+      },
+    },
+    where: {
+      pertemuan: {
+        id: pertemuanId,
+      },
+      user: {
+        id: userId,
+      },
+    },
+    relations: ['pertemuan', 'user'],
+  };
+
+  return await repository.findOne(options);
+}

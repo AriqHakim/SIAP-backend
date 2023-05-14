@@ -5,7 +5,7 @@ import { PaginationResult } from '../../../framework/pagination.interface';
 import { Presensi } from '../../../entity/Presensi.entity';
 import {
   getPresensiByPertemuan,
-  getPresensiByUserKelas,
+  getPresensiByPertemuanUser,
 } from '../../../data-repository/Presensi.data';
 import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
 import { BadRequestError } from '../../../framework/error.interface';
@@ -28,7 +28,7 @@ export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
     }
     presensi = await getPresensiByPertemuan(data.id, data.limit, data.offset);
   } else {
-    presensi.data = [await getPresensiByUserKelas(data.kelasId, data.user.id)];
+    presensi.data = [await getPresensiByPertemuanUser(data.id, data.user.id)];
     presensi.total_data = 1;
   }
 
