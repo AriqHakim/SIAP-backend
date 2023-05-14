@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { asistenChecker } from '../../../framework/AuthChecker';
 import { ResponseBody } from '../../../framework/response.interface';
-import { createPertemuanInterface } from '../Pertemuan.interface';
+import { createPertemuanInterface } from '../pertemuan.interface';
 import { dateConverter } from '../../../framework/utils';
 import { createPertemuanLogic } from '../logic/createPertemuan.logic';
 

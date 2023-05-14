@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { userChecker } from '../../../framework/AuthChecker';
-import { getPertemuanByIDInterface } from '../Pertemuan.interface';
+import { getPertemuanByIDInterface } from '../pertemuan.interface';
 import { ResponseBody } from '../../../framework/response.interface';
 import { parseQueryToInt } from '../../../framework/utils';
 import { getPertemuanByIDLogic } from '../logic/getPertemuanByID.logic';

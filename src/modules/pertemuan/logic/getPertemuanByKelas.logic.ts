@@ -1,5 +1,5 @@
 import { getKelasByID } from '../../../data-repository/Kelas.data';
-import { getPertemuanByKelasInterface } from '../Pertemuan.interface';
+import { getPertemuanByKelasInterface } from '../pertemuan.interface';
 import { NotFoundError } from '../../../framework/error.interface';
 import {
   getPertemuanByKelasID,
