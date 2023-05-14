@@ -18,3 +18,9 @@ export class JoinKelasInterface {
   user: User;
   kode: string;
 }
+
+export class GetKelasByIDInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+}

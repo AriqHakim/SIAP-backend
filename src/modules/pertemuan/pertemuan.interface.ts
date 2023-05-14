@@ -18,3 +18,9 @@ export class getPertemuanByIDInterface {
   limit: number;
   offset: number;
 }
+
+export class getPertemuanByKelasInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+}
