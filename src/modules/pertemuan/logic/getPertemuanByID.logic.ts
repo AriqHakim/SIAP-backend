@@ -1,5 +1,5 @@
 import { getPertemuanByID } from '../../../data-repository/Pertemuan.data';
-import { getPertemuanByIDInterface } from '../Pertemuan.interface';
+import { getPertemuanByIDInterface } from '../pertemuan.interface';
 import { Pertemuan } from '../../../entity/Pertemuan.entity';
 import { PaginationResult } from '../../../framework/pagination.interface';
 import { Presensi } from '../../../entity/Presensi.entity';

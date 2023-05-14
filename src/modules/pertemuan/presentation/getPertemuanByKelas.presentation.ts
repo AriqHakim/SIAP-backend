@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getPertemuanByKelasInterface } from '../Pertemuan.interface';
+import { getPertemuanByKelasInterface } from '../pertemuan.interface';
 import { userChecker } from '../../../framework/AuthChecker';
 import { ResponseBody } from '../../../framework/response.interface';
 import { getPertemuanByKelasLogic } from '../logic/getPertemuanByKelas.logic';

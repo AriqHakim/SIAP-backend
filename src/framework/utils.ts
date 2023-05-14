@@ -40,10 +40,20 @@ export function dateConverter(str: string, options?: any) {
     'dd/MM/yyyy hh:mm:ss',
     options,
   ).toJSDate();
-  if (date === undefined) {
+  if (date === undefined || date === null) {
     throw new BadRequestError(
-      `Field date format invalid, must be dd/MM/yyyy h:mm:ss`,
+      `Field date format invalid, must be dd/MM/yyyy hh:mm:ss`,
     );
   }
   return date;
+}
+
+export function giveCurrentDateTime() {
+  const today = new Date();
+  const date =
+    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  const time =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  const dateTime = date + '_' + time;
+  return dateTime;
 }
