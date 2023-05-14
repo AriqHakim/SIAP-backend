@@ -10,6 +10,7 @@ import { AsistenPraktikum } from './AsistenPraktikum.entity';
 import { Broadcast } from './Broadcast.entity';
 import { Pertemuan } from './Pertemuan.entity';
 import { UserKelas } from './UserKelas.entity';
+import { KelasAsisten } from './KelasAsisten.entity';
 
 @Entity('kelas')
 export class Kelas {
@@ -34,14 +35,6 @@ export class Kelas {
   })
   kode: string;
 
-  @ManyToOne(() => AsistenPraktikum, {
-    cascade: true,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn({ name: 'asisten_id' })
-  asisten: AsistenPraktikum;
-
   @OneToMany(() => Broadcast, (bc) => bc.kelas)
   broadcasts?: Broadcast[];
 
@@ -50,4 +43,7 @@ export class Kelas {
 
   @OneToMany(() => UserKelas, (u) => u.kelas)
   userKelas?: UserKelas[];
+
+  @OneToMany(() => KelasAsisten, (a) => a.kelas)
+  asistenKelas?: KelasAsisten[];
 }

@@ -1,24 +1,14 @@
-import { Admin } from '../../../entity/Admin.entity';
 import { ApprovalInterface } from '../Admin.interface';
-import { UnauthorizedError } from '../../../framework/error.interface';
-import { extractDataFromJWT } from '../../../framework/JWTExtractor';
-import { jwt_config_admin } from '../../../jwt.config';
 import { Request, Response } from 'express';
 import { rejectApprovalLogic } from '../logic/RejectApproval.logic';
 import { ResponseBody } from '../../../framework/response.interface';
+import { adminChecker } from '../../../framework/AuthChecker';
 
 export async function rejectApproval(req: Request, res: Response) {
   try {
     const data: ApprovalInterface = new ApprovalInterface();
 
-    if (!req.headers['authorization']) {
-      throw new UnauthorizedError(`Your request is unauthorized`);
-    }
-
-    data.admin = (await extractDataFromJWT(
-      jwt_config_admin,
-      req.headers['authorization'] as string,
-    )) as Admin;
+    data.admin = await adminChecker(req.headers['authorization'] as string);
 
     data.id = req.params.id;
 

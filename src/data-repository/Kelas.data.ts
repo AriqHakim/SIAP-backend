@@ -1,23 +1,30 @@
 import AppDataSource from '../orm.config';
 import { Kelas } from '../entity/Kelas.entity';
-import { FindManyOptions } from 'typeorm';
+import { FindManyOptions, FindOneOptions } from 'typeorm';
 
 const repository = AppDataSource.getRepository(Kelas);
 
-export async function GetAllKelasByUserID(userId: string) {
+export async function getAllKelasByUserID(userId: string) {
   const options: FindManyOptions<Kelas> = {
     select: {
       id: true,
       judul: true,
       deskripsi: true,
-      kode: false,
       userKelas: {
-        user: {
-          id: false,
-          email: false,
-          name: false,
-          password: false,
-          npm: false,
+        id: false,
+      },
+      asistenKelas: {
+        id: true,
+        asisten: {
+          id: true,
+          instansi: false,
+          user: {
+            id: true,
+            email: false,
+            name: true,
+            password: false,
+            npm: false,
+          },
         },
       },
     },
@@ -28,31 +35,111 @@ export async function GetAllKelasByUserID(userId: string) {
         },
       },
     },
-    relations: ['userKelas', 'userKelas.user'],
+    relations: [
+      'userKelas',
+      'userKelas.user',
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
   };
 
   return await repository.find(options);
 }
 
-export async function GetAllKelasByAsistenID(asistenId: string) {
+export async function getAllKelasByAsistenID(asistenId: string) {
   const options: FindManyOptions<Kelas> = {
     select: {
       id: true,
       judul: true,
       deskripsi: true,
       kode: false,
-      asisten: {
-        id: false,
-        instansi: false,
+      asistenKelas: {
+        id: true,
+        asisten: {
+          id: true,
+          instansi: false,
+          user: {
+            id: true,
+            email: false,
+            name: true,
+            password: false,
+            npm: false,
+          },
+        },
       },
     },
     where: {
-      asisten: {
-        id: asistenId,
+      asistenKelas: {
+        asisten: {
+          id: asistenId,
+        },
       },
     },
-    relations: ['asisten'],
+    relations: [
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
   };
 
   return await repository.find(options);
+}
+
+export async function upsertKelas(data: Kelas) {
+  return await repository.save(data);
+}
+
+export async function getKelasByKode(kode: string) {
+  const options: FindOneOptions<Kelas> = {
+    where: {
+      kode: kode,
+    },
+  };
+
+  return await repository.findOne(options);
+}
+
+export async function getKelasByJudul(judul: string) {
+  const options: FindOneOptions<Kelas> = {
+    where: {
+      judul: judul,
+    },
+  };
+
+  return await repository.findOne(options);
+}
+
+export async function getKelasByID(id: string) {
+  return await repository.findOne({
+    where: {
+      id: id,
+    },
+  });
+}
+
+export async function getKelasByIDwithAsisten(id: string) {
+  return await repository.findOne({
+    select: {
+      asistenKelas: {
+        id: true,
+        asisten: {
+          id: true,
+          user: {
+            id: true,
+            name: true,
+            password: false,
+          },
+        },
+      },
+    },
+    where: {
+      id: id,
+    },
+    relations: [
+      'asistenKelas',
+      'asistenKelas.asisten',
+      'asistenKelas.asisten.user',
+    ],
+  });
 }

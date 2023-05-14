@@ -14,8 +14,6 @@ import { Kelas } from './entity/Kelas.entity';
 import { Kelas1680928192303 } from './migration/1680928192303-Kelas';
 import { UserKelas } from './entity/UserKelas.entity';
 import { UserKelas1680928495302 } from './migration/1680928495302-UserKelas';
-import { Kategori } from './entity/Kategori.entity';
-import { Kategori1680928792339 } from './migration/1680928792339-Kategori';
 import { Broadcast } from './entity/Broadcast.entity';
 import { Broadcast1680939543362 } from './migration/1680939543362-Broadcast';
 import { Attachment } from './entity/Attachment.entity';
@@ -27,6 +25,11 @@ import { Presensi1680942631095 } from './migration/1680942631095-Presensi';
 import { Perizinan } from './entity/Perizinan.entity';
 import { Perizinan1680943216115 } from './migration/1680943216115-Perizinan';
 import { AlterEmail1682998991704 } from './migration/1682998991704-AlterEmail';
+import { KelasAsisten } from './entity/KelasAsisten.entity';
+import { KelasAsisten1683211544604 } from './migration/1683211544604-KelasAsisten';
+import { RemoveOneToManyAsistenKelas1683211761622 } from './migration/1683211761622-RemoveOneToManyAsistenKelas';
+import { deleteDeskripsiColumn1683770502574 } from './migration/1683770502574-delete-deskripsi-column';
+import { alterNullablePresensi1683896570987 } from './migration/1683896570987-alter-nullable-presensi';
 
 const AppDataSource: DataSource = new DataSource({
   type: 'mysql',
@@ -42,12 +45,12 @@ const AppDataSource: DataSource = new DataSource({
     AsistenPraktikum,
     Kelas,
     UserKelas,
-    Kategori,
     Broadcast,
     Attachment,
     Pertemuan,
     Presensi,
     Perizinan,
+    KelasAsisten,
   ],
   migrations: [
     Admin1680922513935,
@@ -56,18 +59,21 @@ const AppDataSource: DataSource = new DataSource({
     AsistenPraktikum1680924698192,
     Kelas1680928192303,
     UserKelas1680928495302,
-    Kategori1680928792339,
     Broadcast1680939543362,
     Attachment1680940858600,
     Pertemuan1680941170378,
     Presensi1680942631095,
     Perizinan1680943216115,
     AlterEmail1682998991704,
+    KelasAsisten1683211544604,
+    RemoveOneToManyAsistenKelas1683211761622,
+    deleteDeskripsiColumn1683770502574,
+    alterNullablePresensi1683896570987,
   ],
   migrationsTableName: 'migrations',
   synchronize: false,
-  logging: true,
-  migrationsRun: true,
+  logging: false,
+  migrationsRun: false,
 });
 
 export default AppDataSource;

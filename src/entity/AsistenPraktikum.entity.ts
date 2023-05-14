@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { User } from './User.entity';
-import { Kelas } from './Kelas.entity';
+import { KelasAsisten } from './KelasAsisten.entity';
 
 @Entity('asisten_praktikum')
 export class AsistenPraktikum {
@@ -26,8 +26,8 @@ export class AsistenPraktikum {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user?: User;
 
-  @OneToMany(() => Kelas, (k) => k.asisten)
-  kelas?: Kelas[];
+  @OneToMany(() => KelasAsisten, (k) => k.asisten)
+  asistenKelas?: KelasAsisten[];
 }

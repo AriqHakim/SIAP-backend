@@ -6,7 +6,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Kategori } from './Kategori.entity';
 import { AsistenPraktikum } from './AsistenPraktikum.entity';
 import { Kelas } from './Kelas.entity';
 import { Attachment } from './Attachment.entity';
@@ -45,12 +44,6 @@ export class Broadcast {
   })
   @JoinColumn({ name: 'owner_id' })
   owner?: AsistenPraktikum;
-
-  @ManyToOne(() => Kategori, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'kategori_id' })
-  kategori?: Kategori;
 
   @OneToMany(() => Attachment, (a) => a.broadcast)
   attachment?: Attachment[];

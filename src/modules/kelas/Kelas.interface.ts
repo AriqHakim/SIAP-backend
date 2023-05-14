@@ -5,3 +5,22 @@ export class GetAllKelasInterface {
   user: User;
   asisten?: AsistenPraktikum;
 }
+
+export class CreateKelasInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  judul: string;
+  deskripsi: string;
+  otherAsisten: AsistenPraktikum[];
+}
+
+export class JoinKelasInterface {
+  user: User;
+  kode: string;
+}
+
+export class GetKelasByIDInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+}

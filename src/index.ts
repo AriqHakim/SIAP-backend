@@ -9,6 +9,11 @@ import cors from 'cors';
 import authRouter from './modules/auth/Auth.route';
 import adminRouter from './modules/admin/Admin.route';
 import kelasRouter from './modules/kelas/Kelas.route';
+import asistenRouter from './modules/asisten/Asisten.route';
+import userRouter from './modules/user/User.route';
+import pertRouter from './modules/pertemuan/pertemuan.route';
+import broadcastRouter from './modules/broadcast/Broadcast.route';
+import perizinanRouter from './modules/perizinan/Perizinan.route';
 
 const PORT: number = parseInt(process.env.PORT || '3000');
 
@@ -34,6 +39,11 @@ async function main() {
   server.use('/', authRouter);
   server.use('/admin', adminRouter);
   server.use('/kelas', kelasRouter);
+  server.use('/asisten', asistenRouter);
+  server.use('/user', userRouter);
+  server.use('/', pertRouter);
+  server.use('/', broadcastRouter);
+  server.use('/', perizinanRouter);
 }
 
 main();
