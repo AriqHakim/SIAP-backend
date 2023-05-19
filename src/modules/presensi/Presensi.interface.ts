@@ -1,4 +1,3 @@
-import { AsistenPraktikum } from '../../entity/AsistenPraktikum.entity';
 import { User } from '../../entity/User.entity';
 
 export class PresensiUserInterface {
@@ -8,9 +7,7 @@ export class PresensiUserInterface {
   file: Express.Multer.File;
 }
 
-export class GetPresensiByPertemuan {
+export class GetPresensiKelasInterface {
   user: User;
-  asisten: AsistenPraktikum;
-  pertemuanId: string;
   kelasId: string;
 }

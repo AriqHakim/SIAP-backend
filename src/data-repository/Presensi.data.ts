@@ -51,10 +51,25 @@ export async function getPresensiByPertemuan(
 }
 
 export async function getPresensiByUserKelas(kelasId: string, userId: string) {
-  const options: FindOneOptions<Presensi> = {
+  const options: FindManyOptions<Presensi> = {
     select: {
+      id: true,
+      bukti: false,
+      date: true,
+      status: true,
+      isValidate: true,
       pertemuan: {
-        id: false,
+        id: true,
+        judul: true,
+        startDate: true,
+        endDate: false,
+        indexPert: true,
+        kelas: {
+          id: true,
+          judul: false,
+          deskripsi: false,
+          kode: false,
+        },
       },
       user: {
         id: true,
@@ -72,10 +87,15 @@ export async function getPresensiByUserKelas(kelasId: string, userId: string) {
         id: userId,
       },
     },
+    order: {
+      pertemuan: {
+        indexPert: 'ASC',
+      },
+    },
     relations: ['pertemuan', 'pertemuan.kelas', 'user'],
   };
 
-  return await repository.findOne(options);
+  return await repository.find(options);
 }
 
 export async function getPresensiByPertemuanUser(
