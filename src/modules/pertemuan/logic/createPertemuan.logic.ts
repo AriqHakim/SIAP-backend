@@ -47,17 +47,5 @@ export async function createPertemuanLogic(data: createPertemuanInterface) {
 
   const pert = await upsertPertemuan(result);
 
-  const users = await getUserKelasByKelasID(kelas.id);
-  for (let i = 0; i < users.length; i++) {
-    const temp = new Presensi();
-    temp.bukti = null;
-    temp.date = null;
-    temp.status = STATUS_KEHADIRAN.TIDAK_HADIR;
-    temp.isValidate = false;
-    temp.pertemuan = pert;
-    temp.user = users[i].user;
-    await upsertPresensi(temp);
-  }
-
   return pert;
 }
