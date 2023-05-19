@@ -15,14 +15,31 @@ export async function getPresensiByPertemuan(
   offset: number,
 ) {
   const options: FindManyOptions<Presensi> = {
+    select: {
+      id: true,
+      user: {
+        id: true,
+        name: true,
+        npm: true,
+        password: false,
+      },
+      pertemuan: {
+        id: true,
+      },
+    },
     where: {
       pertemuan: {
         id: id,
       },
     },
+    order: {
+      user: {
+        npm: 'ASC',
+      },
+    },
     take: limit,
     skip: offset,
-    relations: ['pertemuan'],
+    relations: ['pertemuan', 'user'],
   };
 
   return {
@@ -95,5 +112,6 @@ export async function getPresensiByID(id: string) {
     where: {
       id: id,
     },
+    relations: ['pertemuan', 'user'],
   });
 }

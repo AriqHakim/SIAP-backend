@@ -14,6 +14,9 @@ export async function getBroadcastByKelasID(id: string) {
         id: id,
       },
     },
+    order: {
+      date: 'DESC',
+    },
     relations: ['kelas', 'attachment'],
   });
 }
