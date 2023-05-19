@@ -15,14 +15,31 @@ export async function getPresensiByPertemuan(
   offset: number,
 ) {
   const options: FindManyOptions<Presensi> = {
+    select: {
+      id: true,
+      user: {
+        id: true,
+        name: true,
+        npm: true,
+        password: false,
+      },
+      pertemuan: {
+        id: true,
+      },
+    },
     where: {
       pertemuan: {
         id: id,
       },
     },
+    order: {
+      user: {
+        npm: 'ASC',
+      },
+    },
     take: limit,
     skip: offset,
-    relations: ['pertemuan'],
+    relations: ['pertemuan', 'user'],
   };
 
   return {
@@ -34,10 +51,25 @@ export async function getPresensiByPertemuan(
 }
 
 export async function getPresensiByUserKelas(kelasId: string, userId: string) {
-  const options: FindOneOptions<Presensi> = {
+  const options: FindManyOptions<Presensi> = {
     select: {
+      id: true,
+      bukti: false,
+      date: true,
+      status: true,
+      isValidate: true,
       pertemuan: {
-        id: false,
+        id: true,
+        judul: true,
+        startDate: true,
+        endDate: false,
+        indexPert: true,
+        kelas: {
+          id: true,
+          judul: false,
+          deskripsi: false,
+          kode: false,
+        },
       },
       user: {
         id: true,
@@ -55,10 +87,15 @@ export async function getPresensiByUserKelas(kelasId: string, userId: string) {
         id: userId,
       },
     },
+    order: {
+      pertemuan: {
+        indexPert: 'ASC',
+      },
+    },
     relations: ['pertemuan', 'pertemuan.kelas', 'user'],
   };
 
-  return await repository.findOne(options);
+  return await repository.find(options);
 }
 
 export async function getPresensiByPertemuanUser(
@@ -88,4 +125,20 @@ export async function getPresensiByPertemuanUser(
   };
 
   return await repository.findOne(options);
+}
+
+export async function getPresensiByID(id: string) {
+  return await repository.findOne({
+    select: {
+      user: {
+        id: true,
+        name: true,
+        npm: true,
+      },
+    },
+    where: {
+      id: id,
+    },
+    relations: ['pertemuan', 'user'],
+  });
 }

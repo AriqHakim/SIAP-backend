@@ -11,9 +11,6 @@ import {
 import { Pertemuan } from '../../../entity/Pertemuan.entity';
 import { DateTime } from 'luxon';
 import { dateConverter } from '../../../framework/utils';
-import { getUserKelasByKelasID } from '../../../data-repository/UserKelas.data';
-import { upsertPresensi } from '../../../data-repository/Presensi.data';
-import { Presensi, STATUS_KEHADIRAN } from '../../../entity/Presensi.entity';
 import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
 
 export async function createPertemuanLogic(data: createPertemuanInterface) {
@@ -46,18 +43,6 @@ export async function createPertemuanLogic(data: createPertemuanInterface) {
   result.kelas = kelas;
 
   const pert = await upsertPertemuan(result);
-
-  const users = await getUserKelasByKelasID(kelas.id);
-  for (let i = 0; i < users.length; i++) {
-    const temp = new Presensi();
-    temp.bukti = null;
-    temp.date = null;
-    temp.status = STATUS_KEHADIRAN.TIDAK_HADIR;
-    temp.isValidate = false;
-    temp.pertemuan = pert;
-    temp.user = users[i].user;
-    await upsertPresensi(temp);
-  }
 
   return pert;
 }
