@@ -129,6 +129,13 @@ export async function getPresensiByPertemuanUser(
 
 export async function getPresensiByID(id: string) {
   return await repository.findOne({
+    select: {
+      user: {
+        id: true,
+        name: true,
+        npm: true,
+      },
+    },
     where: {
       id: id,
     },
