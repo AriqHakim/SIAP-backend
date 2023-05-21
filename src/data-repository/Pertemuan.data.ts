@@ -84,3 +84,7 @@ export async function getPresensiPertemuanByKelasID(
   };
   return await repository.find(options);
 }
+
+export async function deletePertemuanByID(id: string) {
+  return await repository.delete({ id: id });
+}
