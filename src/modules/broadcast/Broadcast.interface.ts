@@ -17,3 +17,10 @@ export class getBroadcastByKelasInterface {
   asisten: AsistenPraktikum;
   kelasId: string;
 }
+
+export class deleteBroadcastByIDInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+  broadcastId: string;
+}

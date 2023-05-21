@@ -14,6 +14,7 @@ import userRouter from './modules/user/User.route';
 import pertRouter from './modules/pertemuan/pertemuan.route';
 import broadcastRouter from './modules/broadcast/Broadcast.route';
 import perizinanRouter from './modules/perizinan/Perizinan.route';
+import presensiRouter from './modules/presensi/Presensi.route';
 
 const PORT: number = parseInt(process.env.PORT || '3000');
 
@@ -44,6 +45,7 @@ async function main() {
   server.use('/', pertRouter);
   server.use('/', broadcastRouter);
   server.use('/', perizinanRouter);
+  server.use('/', presensiRouter);
 }
 
 main();

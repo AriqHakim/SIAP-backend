@@ -38,6 +38,9 @@ export async function getPertemuanByKelasID(id: string) {
         id: id,
       },
     },
+    order: {
+      indexPert: 'ASC',
+    },
     relations: ['kelas'],
   };
   return await repository.find(options);
@@ -80,4 +83,8 @@ export async function getPresensiPertemuanByKelasID(
     relations: ['kelas', 'presensi', 'presensi.user'],
   };
   return await repository.find(options);
+}
+
+export async function deletePertemuanByID(id: string) {
+  return await repository.delete({ id: id });
 }

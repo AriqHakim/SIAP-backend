@@ -14,6 +14,13 @@ export async function getBroadcastByKelasID(id: string) {
         id: id,
       },
     },
+    order: {
+      date: 'DESC',
+    },
     relations: ['kelas', 'attachment'],
   });
+}
+
+export async function deleteBroadcastByID(id: string) {
+  return await repository.delete({ id: id });
 }
