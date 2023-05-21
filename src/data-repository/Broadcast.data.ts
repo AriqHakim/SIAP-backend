@@ -20,3 +20,7 @@ export async function getBroadcastByKelasID(id: string) {
     relations: ['kelas', 'attachment'],
   });
 }
+
+export async function deleteBroadcastByID(id: string) {
+  return await repository.delete({ id: id });
+}
