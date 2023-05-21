@@ -17,6 +17,9 @@ export async function getPresensiByIDLogic(data: PresensiByIdInterface) {
   let isOwned = false;
   for (let i = 0; i < asistenKelas.length; i++) {
     isOwned = asistenKelas[i].asisten.id === data.asisten.id;
+    if (isOwned) {
+      break;
+    }
   }
   if (!isOwned) {
     throw new BadRequestError('Anda bukan pemilik kelas');
