@@ -17,6 +17,8 @@ export async function getPresensiByPertemuan(
   const options: FindManyOptions<Presensi> = {
     select: {
       id: true,
+      status: true,
+      isValidate: true,
       user: {
         id: true,
         name: true,
