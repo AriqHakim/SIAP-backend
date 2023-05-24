@@ -1,6 +1,7 @@
 import AppDataSource from '../orm.config';
 import { UserKelas } from '../entity/UserKelas.entity';
 import { FindManyOptions, FindOneOptions, FindOptionsWhere } from 'typeorm';
+import { countTotalData } from '../framework/utils';
 
 const repository = AppDataSource.getRepository(UserKelas);
 
@@ -33,7 +34,12 @@ export async function getUserKelasByKelasID(id: string) {
     relations: ['user', 'kelas'],
   };
 
-  return await repository.find(options);
+  const data = await repository.find(options);
+  const total_data = await countTotalData(UserKelas, options);
+  return {
+    data,
+    total_data,
+  };
 }
 
 export async function deleteByID(id: string) {
