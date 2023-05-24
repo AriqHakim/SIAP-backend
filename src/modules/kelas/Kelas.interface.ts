@@ -24,3 +24,10 @@ export class GetKelasByIDInterface {
   asisten: AsistenPraktikum;
   kelasId: string;
 }
+
+export class DeletePraktikanByUserIDInterface {
+  user: User;
+  asisten: AsistenPraktikum;
+  kelasId: string;
+  userId: string;
+}

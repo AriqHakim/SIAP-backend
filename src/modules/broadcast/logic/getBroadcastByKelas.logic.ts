@@ -16,8 +16,8 @@ export async function getBroadcastByKelasLogic(
     throw new NotFoundError('Kelas tidak ditemukan');
   }
 
+  const userKelas = await searchUserKelas(data.kelasId, data.user.id);
   if (!data.asisten) {
-    const userKelas = await searchUserKelas(data.kelasId, data.user.id);
     if (!userKelas) {
       throw new BadRequestError('Your request not authorized');
     }
@@ -30,7 +30,7 @@ export async function getBroadcastByKelasLogic(
         break;
       }
     }
-    if (!isOwned) {
+    if (!isOwned && !userKelas) {
       throw new BadRequestError('Anda bukan pemilik kelas');
     }
   }
