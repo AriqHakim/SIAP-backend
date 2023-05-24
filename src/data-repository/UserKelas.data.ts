@@ -1,6 +1,6 @@
 import AppDataSource from '../orm.config';
 import { UserKelas } from '../entity/UserKelas.entity';
-import { FindManyOptions, FindOneOptions } from 'typeorm';
+import { FindManyOptions, FindOneOptions, FindOptionsWhere } from 'typeorm';
 
 const repository = AppDataSource.getRepository(UserKelas);
 
@@ -34,4 +34,11 @@ export async function getUserKelasByKelasID(id: string) {
   };
 
   return await repository.find(options);
+}
+
+export async function deleteByID(id: string) {
+  const options: FindOptionsWhere<UserKelas> = {
+    id: id,
+  };
+  return await repository.delete(options);
 }

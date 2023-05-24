@@ -17,22 +17,27 @@ export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
     data: [],
     total_data: 0,
   };
+  let isOwned = false;
 
+  const userKelas = await searchUserKelas(data.kelasId, data.user.id);
   if (data.asisten) {
-    const asistenKelas = await getAsistenByKelas(data.kelasId);
-    let isOwned = false;
-    for (let i = 0; i < asistenKelas.length; i++) {
-      isOwned = asistenKelas[i].asisten.id === data.asisten.id;
-      if (isOwned) {
-        break;
+    if (!userKelas) {
+      const asistenKelas = await getAsistenByKelas(data.kelasId);
+      for (let i = 0; i < asistenKelas.length; i++) {
+        isOwned = asistenKelas[i].asisten.id === data.asisten.id;
+        if (isOwned) {
+          break;
+        }
       }
+      if (!isOwned) {
+        throw new BadRequestError('Anda bukan pemilik kelas');
+      }
+      presensi = await getPresensiByPertemuan(data.id, data.limit, data.offset);
+    } else {
+      presensi.data = [await getPresensiByPertemuanUser(data.id, data.user.id)];
+      presensi.total_data = presensi.data[0] ? 1 : 0;
     }
-    if (!isOwned) {
-      throw new BadRequestError('Anda bukan pemilik kelas');
-    }
-    presensi = await getPresensiByPertemuan(data.id, data.limit, data.offset);
   } else {
-    const userKelas = await searchUserKelas(data.kelasId, data.user.id);
     if (!userKelas) {
       throw new BadRequestError('Your request not authorized');
     }
