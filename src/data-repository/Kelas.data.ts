@@ -121,6 +121,10 @@ export async function getKelasByID(id: string) {
 export async function getKelasByIDwithAsisten(id: string) {
   return await repository.findOne({
     select: {
+      id: true,
+      judul: true,
+      deskripsi: true,
+      kode: true,
       asistenKelas: {
         id: true,
         asisten: {
