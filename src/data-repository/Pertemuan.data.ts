@@ -41,7 +41,6 @@ export async function getPertemuanByKelasID(id: string) {
     order: {
       indexPert: 'ASC',
     },
-    relations: ['kelas'],
   };
   return await repository.find(options);
 }

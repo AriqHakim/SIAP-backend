@@ -11,6 +11,7 @@ export async function joinKelas(req: Request, res: Response) {
     const auth = await userChecker(req.headers['authorization'] as string);
 
     data.user = auth.user;
+    data.asisten = auth.asisten;
     data.kode = req.body.kode;
 
     const result: ResponseBody<{ success: boolean }> = {
