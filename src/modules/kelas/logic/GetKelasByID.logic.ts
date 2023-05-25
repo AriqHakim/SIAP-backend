@@ -2,7 +2,7 @@ import { BadRequestError } from '../../../framework/error.interface';
 import { searchUserKelas } from '../../../data-repository/UserKelas.data';
 import { GetKelasByIDInterface } from '../Kelas.interface';
 import { getAsistenByKelas } from '../../../data-repository/KelasAsisten.data';
-import { getKelasByIDwithAsisten } from '../../../data-repository/Kelas.data';
+import { getKelasByID } from '../../../data-repository/Kelas.data';
 
 export async function getKelasByIDLogic(data: GetKelasByIDInterface) {
   const userKelas = await searchUserKelas(data.kelasId, data.user.id);
@@ -24,7 +24,8 @@ export async function getKelasByIDLogic(data: GetKelasByIDInterface) {
     }
   }
 
-  const kelas = await getKelasByIDwithAsisten(data.kelasId);
+  const kelas = await getKelasByID(data.kelasId);
+  kelas.asistenKelas = await getAsistenByKelas(kelas.id);
 
   return {
     kelas: kelas,

@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/', GetAllKelas);
 router.post('/', CreateKelas);
 router.post('/join', joinKelas);
-router.get('/:id', getKelasByID);
+router.get('/:kelasId', getKelasByID);
 router.delete('/:kelasId/praktikan/:userId/delete', deletePraktikanByUserID);
 router.get('/:kelasId/praktikan', getUserByKelas);
 
