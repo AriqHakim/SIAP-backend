@@ -107,7 +107,7 @@ export async function getPresensiByPertemuanUser(
   const options: FindOneOptions<Presensi> = {
     select: {
       pertemuan: {
-        id: false,
+        id: true,
       },
       user: {
         id: true,

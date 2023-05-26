@@ -20,8 +20,14 @@ export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
   let isOwned = false;
 
   const userKelas = await searchUserKelas(data.kelasId, data.user.id);
-  if (data.asisten) {
-    if (!userKelas) {
+  if (result.kelas.id !== data.kelasId) {
+    throw new BadRequestError('Your request not authorized');
+  }
+  if (userKelas) {
+    presensi.data = [await getPresensiByPertemuanUser(data.id, data.user.id)];
+    presensi.total_data = presensi.data[0] ? 1 : 0;
+  } else {
+    if (data.asisten) {
       const asistenKelas = await getAsistenByKelas(data.kelasId);
       for (let i = 0; i < asistenKelas.length; i++) {
         isOwned = asistenKelas[i].asisten.id === data.asisten.id;
@@ -34,15 +40,8 @@ export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
       }
       presensi = await getPresensiByPertemuan(data.id, data.limit, data.offset);
     } else {
-      presensi.data = [await getPresensiByPertemuanUser(data.id, data.user.id)];
-      presensi.total_data = presensi.data[0] ? 1 : 0;
-    }
-  } else {
-    if (!userKelas) {
       throw new BadRequestError('Your request not authorized');
     }
-    presensi.data = [await getPresensiByPertemuanUser(data.id, data.user.id)];
-    presensi.total_data = presensi.data[0] ? 1 : 0;
   }
 
   return {

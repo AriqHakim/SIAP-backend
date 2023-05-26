@@ -16,6 +16,7 @@ export class CreateKelasInterface {
 
 export class JoinKelasInterface {
   user: User;
+  asisten: AsistenPraktikum;
   kode: string;
 }
 
