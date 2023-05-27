@@ -18,11 +18,13 @@ export async function createPertemuan(req: Request, res: Response) {
     data.judul = req.body.judul;
     data.startDate = dateConverter(req.body.startDate);
 
+    console.log(data.startDate);
+
     await createPertemuanLogic(data);
 
     const result: ResponseBody<{ success: boolean }> = {
       status: 201,
-      message: 'kelas berhasil dibuat!',
+      message: 'pertemuan berhasil dibuat!',
       data: {
         success: true,
       },

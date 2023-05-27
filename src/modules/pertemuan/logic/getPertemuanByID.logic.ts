@@ -23,6 +23,7 @@ export async function getPertemuanByIDLogic(data: getPertemuanByIDInterface) {
   if (result.kelas.id !== data.kelasId) {
     throw new BadRequestError('Your request not authorized');
   }
+
   if (userKelas) {
     presensi.data = [await getPresensiByPertemuanUser(data.id, data.user.id)];
     presensi.total_data = presensi.data[0] ? 1 : 0;

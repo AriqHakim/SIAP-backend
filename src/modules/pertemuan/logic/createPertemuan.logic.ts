@@ -38,10 +38,12 @@ export async function createPertemuanLogic(data: createPertemuanInterface) {
   const result = new Pertemuan();
   result.judul = data.judul;
   const date = DateTime.fromJSDate(data.startDate);
+  console.log(date);
   result.startDate = data.startDate;
   result.endDate = dateConverter(
     date.plus({ hours: 2 }).toFormat('dd/MM/yyyy hh:mm:ss'),
   );
+  console.log(result.endDate);
   result.indexPert = data.indexPertemuan;
   result.kelas = kelas;
 
