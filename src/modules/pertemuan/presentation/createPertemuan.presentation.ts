@@ -18,8 +18,6 @@ export async function createPertemuan(req: Request, res: Response) {
     data.judul = req.body.judul;
     data.startDate = dateConverter(req.body.startDate);
 
-    console.log(data.startDate);
-
     await createPertemuanLogic(data);
 
     const result: ResponseBody<{ success: boolean }> = {
