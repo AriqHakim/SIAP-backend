@@ -40,9 +40,7 @@ export async function createPertemuanLogic(data: createPertemuanInterface) {
   const date = DateTime.fromJSDate(data.startDate);
 
   result.startDate = data.startDate;
-  result.endDate = dateConverter(
-    date.plus({ hours: 2 }).toFormat('dd/MM/yyyy hh:mm:ss'),
-  );
+  result.endDate = dateConverter(date.plus({ hours: 2 }).toISO());
 
   result.indexPert = data.indexPertemuan;
   result.kelas = kelas;

@@ -35,15 +35,12 @@ export function randomString(length: number): string {
 }
 
 export function dateConverter(str: string, options?: any) {
-  const date = DateTime.fromFormat(
-    str,
-    'dd/MM/yyyy hh:mm:ss',
-    options,
-  ).toJSDate();
+  const date = DateTime.fromISO(str, {
+    ...options,
+    zone: 'Asia/Jakarta',
+  }).toJSDate();
   if (date === undefined || date === null) {
-    throw new BadRequestError(
-      `Field date format invalid, must be dd/MM/yyyy hh:mm:ss`,
-    );
+    throw new BadRequestError(`Field date format invalid, must be ISO Format`);
   }
   return date;
 }
