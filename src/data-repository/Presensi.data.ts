@@ -144,3 +144,7 @@ export async function getPresensiByID(id: string) {
     relations: ['pertemuan', 'user'],
   });
 }
+
+export async function bulkDeletePresensi(data: string[]) {
+  return await repository.delete(data);
+}

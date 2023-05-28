@@ -9,6 +9,10 @@ import {
   deleteByID,
   searchUserKelas,
 } from '../../../data-repository/UserKelas.data';
+import {
+  bulkDeletePresensi,
+  getPresensiByUserKelas,
+} from '../../../data-repository/Presensi.data';
 
 export async function deletePraktikanByUserIDLogic(
   data: DeletePraktikanByUserIDInterface,
@@ -34,6 +38,14 @@ export async function deletePraktikanByUserIDLogic(
   if (!userKelas) {
     throw new BadRequestError('User tidak ada dalam kelas!');
   }
+
+  const presensiUser = await getPresensiByUserKelas(kelas.id, data.user.id);
+  const presensi: string[] = [];
+  for (let i = 0; i < presensiUser.length; i++) {
+    presensi.push(presensiUser[i].id);
+  }
+
+  await bulkDeletePresensi(presensi);
 
   const result = await deleteByID(userKelas.id);
 

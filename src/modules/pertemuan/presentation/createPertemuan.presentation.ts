@@ -22,7 +22,7 @@ export async function createPertemuan(req: Request, res: Response) {
 
     const result: ResponseBody<{ success: boolean }> = {
       status: 201,
-      message: 'kelas berhasil dibuat!',
+      message: 'pertemuan berhasil dibuat!',
       data: {
         success: true,
       },
