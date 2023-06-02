@@ -5,8 +5,8 @@ import { getPertemuanByID } from '../../../data-repository/Pertemuan.data';
 import { BadRequestError } from '../../../framework/error.interface';
 import { getKelasByID } from '../../../data-repository/Kelas.data';
 import { upsertPerizinan } from '../../../data-repository/Perizinan.data';
-import { getPresensiByPertemuanUser } from '../../../data-repository/Presensi.data';
 import { upsertPresensi } from '../../../data-repository/Presensi.data';
+import { Presensi } from '../../../entity/Presensi.entity';
 
 export async function createPerizinanLogic(data: createPerizinanInterface) {
   const kelas = await getKelasByID(data.kelasId);
@@ -33,9 +33,13 @@ export async function createPerizinanLogic(data: createPerizinanInterface) {
 
   const result = await upsertPerizinan(perizinan);
 
-  const presensi = await getPresensiByPertemuanUser(pertemuan.id, data.user.id);
+  const presensi = new Presensi();
   presensi.status = data.status;
   presensi.bukti = perizinan.bukti;
+  presensi.date = currDay;
+  presensi.isValidate = false;
+  presensi.user = data.user;
+  presensi.pertemuan = pertemuan;
   await upsertPresensi(presensi);
 
   return result instanceof Perizinan;

@@ -3,6 +3,7 @@ import { createPerizinanInterface } from '../Perizinan.interface';
 import { userChecker } from '../../../framework/AuthChecker';
 import { ResponseBody } from '../../../framework/response.interface';
 import { createPerizinanLogic } from '../logic/CreatePerizinan.logic';
+import { STATUS_KEHADIRAN } from '../../../entity/Presensi.entity';
 
 export async function createPerizinan(req: Request, res: Response) {
   try {
@@ -13,7 +14,6 @@ export async function createPerizinan(req: Request, res: Response) {
     data.user = auth.user;
     data.kelasId = req.params.kelasId;
     data.pertemuanId = req.params.pertemuanId;
-    data.status = req.body.status;
     data.file = req.file;
 
     await createPerizinanLogic(data);
