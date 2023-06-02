@@ -12,6 +12,7 @@ export async function createPerizinan(req: Request, res: Response) {
     const auth = await userChecker(req.headers['authorization']);
 
     data.user = auth.user;
+    data.status = req.body.status as STATUS_KEHADIRAN;
     data.kelasId = req.params.kelasId;
     data.pertemuanId = req.params.pertemuanId;
     data.file = req.file;
